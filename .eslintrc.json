@@ -1,3 +1,28 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["eslint:recommended", "next/core-web-vitals"],
+  "rules": {
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "quotes": ["error", "single"],
+    "no-var": ["error"],
+    "no-multi-spaces": ["error"],
+    "indent": ["error", 2],
+    "semi": ["error", "never"],
+    "eol-last": ["error", "always"],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "no-console": ["warn", {"allow": ["warn"] }],
+    "react/jsx-curly-spacing": ["warn", "never"],
+    // Always self-close tags that have no children
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": true
+    }],
+    "react/jsx-boolean-value": "error"
+  }
 }

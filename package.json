@@ -2,7 +2,7 @@
   "name": "hang-over",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next -p 3002",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
