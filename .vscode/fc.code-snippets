@@ -1,0 +1,15 @@
+{
+  "new Function Component": {
+    "prefix": "FC",
+    "body": [
+      "import { FC } from 'react'",
+      "", 
+      "interface Props {}",
+      "const ${1:$TM_FILENAME_BASE}: FC<Props> = (props: Props) => {",
+      "  return (<></>)",
+      "}",
+      "export default ${1:$TM_FILENAME_BASE}"
+    ],
+    "description": "Template of new FC"
+  }
+}
