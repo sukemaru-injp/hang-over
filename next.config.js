@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
@@ -9,6 +11,9 @@ const nextConfig = {
     FIREBASE_MESSAGINGSENDERID: process.env.FIREBASE_MESSAGINGSENDERID,
     FIREBASE_APPID: process.env.FIREBASE_APPID,
     FIREBASE_MEASUREMENTID: process.env.FIREBASE_MEASUREMENTID
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   }
 }
 

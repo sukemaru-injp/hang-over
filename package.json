@@ -2,7 +2,7 @@
   "name": "hang-over",
   "private": true,
   "scripts": {
-    "dev": "next -p 3003",
+    "dev": "next -p 3002",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,7 +13,8 @@
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "recoil": "^0.6.1"
+    "recoil": "^0.6.1",
+    "sass": "^1.49.8"
   },
   "devDependencies": {
     "@types/node": "17.0.18",
