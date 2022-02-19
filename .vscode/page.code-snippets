@@ -1,0 +1,19 @@
+{
+  "new Next Page": {
+    "prefix": "NextPage",
+    "body": [
+      "import type { NextPage } from 'next'",
+      "",
+      "const ${TM_DIRECTORY/.*\\/(.)(.+)$/${1:/upcase}$2/}Page: NextPage = () => {", 
+      "  return (",
+      "    <>",
+      "    </>",
+      "  )",
+      "}",
+      "",
+      "export default ${TM_DIRECTORY/.*\\/(.)(.+)$/${1:/upcase}$2/}Page",
+      ""
+    ],
+    "scope": "typescriptreact"
+  }
+}
