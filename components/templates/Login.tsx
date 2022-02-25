@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import styles from './styles/Login.module.scss'
 import Button from '../atoms/Button'
+import CardWithTitle from '../molecules/CardWithTitle' 
 
 interface Props {}
 
@@ -12,14 +13,14 @@ const Login: FC<Props> = () => {
 
   return (
     <>
-      <div className={styles.Login}>
-        ログイン
-        <div className={styles.Login__buttonArea}>
+      <CardWithTitle
+        title="ログイン">
+        <div className={styles.Login__inner}>
           <Button
             text="ログイン"
             onClick={() => submit()} />
         </div>
-      </div>
+      </CardWithTitle>
     </>
   )
 }
