@@ -1,3 +1,18 @@
+@use '../../../styles/mixin.scss';
+$cMain: #C76E5C;
+
 .CardWithTitle {
   padding: 20px;
+
+  &__title {
+    color: $cMain; 
+  }
+
+  &__titleArea {
+    padding: 0 0 10px 0;
+
+    @include mixin.mediaQuery() {
+      padding: 0 0 5px 0;
+    }
+  }
 }

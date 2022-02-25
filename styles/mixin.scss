@@ -1,0 +1,14 @@
+$mediaQueryPoints: (
+  "default": "screen and (max-width: 1024px)", //tablet and smartphone
+  "mobile": "screen and (max-width: 1024px)", //tablet and smartphone
+  "tabletOnly": "screen and (max-width: 1024px) and (min-width:600px)",
+  "spOnly":"screen and (max-width : 599px)",
+  "spSmallOnly":"screen and (max-width : 350px)",
+  "pcOnly":"screen and (min-width : 1025px)"
+);
+
+@mixin mediaQuery($size: "default") {
+  @media #{map-get($mediaQueryPoints, $size)} {
+    @content;
+  }
+}
