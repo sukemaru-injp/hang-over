@@ -1,13 +1,13 @@
-import { FC } from 'react'
+import { VFC } from 'react'
 import styles from './styles/DefaultHeader.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {}
-const DefaultHeader: FC<Props> = () => {
+const DefaultHeader: VFC<Props> = () => {
   return (
     <>
-      <header className={styles.header}>
+      <header className={styles.Header}>
         <Link href="/" passHref>
           <a>
             <Image
