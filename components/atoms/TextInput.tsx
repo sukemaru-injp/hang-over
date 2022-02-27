@@ -1,6 +1,6 @@
 import { FC, ChangeEvent } from 'react'
 import styles from './styles/TextInput.module.scss'
-interface Props {
+export interface TextInputProps {
   disabled?: boolean
   value: string
   placeholder?: string
@@ -8,7 +8,8 @@ interface Props {
   // eslint-disable-next-line no-unused-vars
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
-const TextInput: FC<Props> = (props: Props) => {
+
+const TextInput: FC<TextInputProps> = (props: TextInputProps) => {
   return (
     <>
       <input

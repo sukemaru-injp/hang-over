@@ -5,7 +5,8 @@ $cMain: #C76E5C;
   padding: 20px;
 
   &__title {
-    color: $cMain; 
+    color: $cMain;
+    font-weight: bold;
   }
 
   &__titleArea {
@@ -14,5 +15,9 @@ $cMain: #C76E5C;
     @include mixin.mediaQuery() {
       padding: 0 0 5px 0;
     }
+  }
+
+  &__line {
+    color: #ccc;
   }
 }

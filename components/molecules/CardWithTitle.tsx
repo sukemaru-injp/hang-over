@@ -14,6 +14,7 @@ const CardWithTitle: FC<Props> = (props: Props) => {
           <div className={styles.CardWithTitle__titleArea}>
             <h3 className={styles.CardWithTitle__title}>{props.title}</h3>
           </div>
+          <hr className={styles.CardWithTitle__line} />
           {props.children}
         </div>
       </Card>
