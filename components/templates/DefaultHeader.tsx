@@ -11,10 +11,17 @@ interface Props {}
 const DefaultHeader: VFC<Props> = () => {
   const { isLogin }: Auth = useRecoilValue(authState)
 
+  const onClickIcon = () => {
+    // eslint-disable-next-line no-console
+    console.log('onClick')
+  }
+
   const userIcon = (login: boolean) => {
-    if (login) {
+    if (!login) {
       return (
-        <div className={styles.Header__inner}>
+        <div
+          className={styles.Header__inner}
+          onClick={() => onClickIcon()}>
           <IconContext.Provider value={{ color: '#FFFFA6', size: '30px' }}>
             <div className={styles.Header__iconWrapper}>
               <FaUserCircle />
