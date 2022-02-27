@@ -38,6 +38,9 @@ const Login: VFC<Props> = () => {
     setError({ ...error, pin: message }) 
   }
 
+  const isEmptyError: boolean = !!error.email || !!error.pin
+  const allInputted: boolean = !!pin && !!email
+
   return (
     <>
       <div className={styles.Login}>
@@ -66,6 +69,7 @@ const Login: VFC<Props> = () => {
           <div className={styles.Login__innerWrapper}>
             <Button
               text="ログイン"
+              disabled={isEmptyError || !allInputted}
               onClick={() => submit()} />
           </div>
         </CardWithTitle>

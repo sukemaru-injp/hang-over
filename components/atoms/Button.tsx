@@ -12,6 +12,7 @@ const Button: FC<Props> = (props: Props) => {
     <>
       <button
         className={styles.ButtonAtom}
+        disabled={props?.disabled || false}
         onClick={() => props.onClick()}>
         <span>{props.text}</span>
       </button>
