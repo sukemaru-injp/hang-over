@@ -16,8 +16,15 @@ export const getUserInfoByFireStore = async (uid: string|null) => {
   }
 }
 
-export const loginAction = async (email: string, pin: string) => {
-  let res
+interface UserResponse {
+  email: string,
+  uid: string,
+  name: string,
+  createData: any
+}
+
+export const loginAction = async (email: string, pin: string): Promise<UserResponse|null> => {
+  let res = null
   await signInWithEmailAndPassword(auth, email, pin)
     .then(async (userCredential: UserCredential) => {
       const { user } = userCredential
@@ -29,7 +36,6 @@ export const loginAction = async (email: string, pin: string) => {
       }
     })
     .catch((e) => {
-      res = {}
       Promise.reject(e)
     })
   return res
