@@ -16,7 +16,7 @@ export const getUserInfoByFireStore = async (uid: string|null) => {
   }
 }
 
-export const login = async (email: string, pin: string) => {
+export const loginAction = async (email: string, pin: string) => {
   let res
   await signInWithEmailAndPassword(auth, email, pin)
     .then(async (userCredential: UserCredential) => {

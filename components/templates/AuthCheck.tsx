@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil'
 import { authState, Auth } from '../../store/auth/atom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../libs/Firebase'
-import { getUserInfoByFireStore } from '../../utils/auth'
+import { getUserInfoByFireStore } from '../../src/auth'
 
 interface Props {
   children: ReactNode
