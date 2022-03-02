@@ -5,6 +5,13 @@ import { getPrefix } from './misc'
 
 const prefix = getPrefix()
 
+interface UserResponse {
+  email: string,
+  uid: string,
+  name: string,
+  createData: any
+}
+
 export const getUserInfoByFireStore = async (uid: string|null) => {
   if (!uid) { return }
   try {
@@ -14,13 +21,6 @@ export const getUserInfoByFireStore = async (uid: string|null) => {
   } catch (e) {
     Promise.reject(e)
   }
-}
-
-interface UserResponse {
-  email: string,
-  uid: string,
-  name: string,
-  createData: any
 }
 
 export const loginAction = async (email: string, pin: string): Promise<UserResponse|null> => {
