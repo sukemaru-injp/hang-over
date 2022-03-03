@@ -1,0 +1,15 @@
+$Main: #C76E5C;
+$cSub: #FFFFA6;
+
+.Footer {
+  text-align: center;
+  height: 50px;
+  background-color: $Main;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__label {
+    color: $cSub;
+  }
+}
