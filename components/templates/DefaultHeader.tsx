@@ -3,13 +3,13 @@ import styles from './styles/DefaultHeader.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRecoilValue } from 'recoil'
-import { authState, Auth } from '../../store/auth/atom'
+import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { FaUserCircle } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 
 interface Props {}
 const DefaultHeader: VFC<Props> = () => {
-  const { isLogin }: Auth = useRecoilValue(authState)
+  const isLogin: loginState = useRecoilValue(isLoginSelector)
 
   const onClickIcon = () => {
     // eslint-disable-next-line no-console
@@ -17,7 +17,7 @@ const DefaultHeader: VFC<Props> = () => {
   }
 
   const userIcon = (login: boolean) => {
-    if (!login) {
+    if (login) {
       return (
         <div
           className={styles.Header__inner}

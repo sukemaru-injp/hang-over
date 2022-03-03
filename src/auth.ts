@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
+import { signInWithEmailAndPassword, UserCredential, signOut } from 'firebase/auth'
 import { auth, firestore } from '../libs/Firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { getPrefix } from './misc'
@@ -39,4 +39,14 @@ export const loginAction = async (email: string, pin: string): Promise<UserRespo
       Promise.reject(e)
     })
   return res
+}
+
+export const logoutAction = async (): Promise<void> => {
+  await signOut(auth)
+    .then(() => {
+      console.log('logout')
+    })
+    .catch((e) => {
+      Promise.reject(e)
+    }) 
 }
