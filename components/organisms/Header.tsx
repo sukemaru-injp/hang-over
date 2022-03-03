@@ -10,19 +10,19 @@ interface Props {
 }
 
 const DefaultHeader: VFC<Props> = (props: Props) => {
-  const [showNav, setNavState] = useState(false)
+  const [navState, setNavState] = useState(false)
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log('effect', showNav)
-  }, [showNav])
+    console.log('effect', navState)
+  }, [navState])
 
   const userIcon = (login: boolean) => {
     if (login) {
       return (
         <div
           className={styles.Header__inner}
-          onClick={() => setNavState(!showNav)}>
+          onClick={() => setNavState(!navState)}>
           <IconContext.Provider value={{ color: '#FFFFA6', size: '30px' }}>
             <div className={styles.Header__iconWrapper}>
               <FaUserCircle />
