@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { VFC, useState, useEffect } from 'react'
 import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,18 +10,19 @@ interface Props {
 }
 
 const DefaultHeader: VFC<Props> = (props: Props) => {
+  const [showNav, setNavState] = useState(false)
 
-  const onClickIcon = () => {
+  useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log('onClick')
-  }
+    console.log('effect', showNav)
+  }, [showNav])
 
   const userIcon = (login: boolean) => {
     if (login) {
       return (
         <div
           className={styles.Header__inner}
-          onClick={() => onClickIcon()}>
+          onClick={() => setNavState(!showNav)}>
           <IconContext.Provider value={{ color: '#FFFFA6', size: '30px' }}>
             <div className={styles.Header__iconWrapper}>
               <FaUserCircle />
