@@ -6,9 +6,9 @@ interface Props {
 }
 const PageWrapper: FC<Props> = (props: Props) => {
   return (
-    <main className={styles.PageWrapper}>
+    <div className={styles.PageWrapper}>
       {props.children}
-    </main>
+    </div>
   )
 }
 

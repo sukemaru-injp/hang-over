@@ -15,7 +15,9 @@ const DefaultView: FC<Props> = (props: Props) => {
       <PageWrapper>
         <Header
           isLogin={isLogin} />
-        {props.children}
+        <main>
+          {props.children}
+        </main>
       </PageWrapper>
     </>
   )
