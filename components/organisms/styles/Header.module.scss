@@ -1,6 +1,16 @@
 $Main: #C76E5C;
 $cSub: #FFFFA6;
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .Header {
   position: sticky;
   background-color: $Main;
@@ -16,5 +26,13 @@ $cSub: #FFFFA6;
 
   &__iconWrapper {
     cursor: pointer;
+  }
+
+  &__navArea {
+    position: absolute;
+    top: 55px;
+    right: 5px;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
   }
 }

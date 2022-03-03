@@ -1,0 +1,25 @@
+@use '../../../styles/mixin.scss';
+
+.Nav {
+  width: 200px;
+
+  &__lists {
+    width: 100%;
+  }
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd;
+    height: 40px;
+    border: 1px solid #808080;
+    color: #fff;
+    transition: all 0.2s;
+    padding: 10px 15px;
+
+    &:hover {
+      background-color: #808080;
+      cursor: pointer;
+    }
+  }
+}

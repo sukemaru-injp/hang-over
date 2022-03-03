@@ -1,16 +1,17 @@
-import { VFC, useState, useEffect } from 'react'
+import { VFC, useState, useEffect, memo } from 'react'
 import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaUserCircle } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
+import Nav from '../organisms/Nav'
 
 interface Props {
   isLogin: boolean
 }
 
 const DefaultHeader: VFC<Props> = (props: Props) => {
-  const [navState, setNavState] = useState(false)
+  const [navState, setNavState] = useState<boolean>(false)
 
   useEffect(() => {
     // eslint-disable-next-line no-console
@@ -36,6 +37,18 @@ const DefaultHeader: VFC<Props> = (props: Props) => {
       )
     }
   }
+
+  const showNav = (isShow: boolean) => {
+    if (isShow) {
+      return (
+        <div className={styles.Header__navArea}>
+          <Nav />
+        </div>
+      )
+    } else {
+      return (<></>)
+    }
+  }
   return (
     <>
       <header className={styles.Header}>
@@ -51,9 +64,10 @@ const DefaultHeader: VFC<Props> = (props: Props) => {
           </Link>
         </div>
         {userIcon(props.isLogin)}
+        {showNav(navState)}
       </header>
     </>
   )
 }
 
-export default DefaultHeader
+export default memo(DefaultHeader)
