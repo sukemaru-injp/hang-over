@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
-import DefaultHeader from '../components/organisms/DefaultHeader'
+import DefaultView from '../components/templates/DefaultView'
 import AuthCheck from '../components/templates/AuthCheck'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -9,8 +9,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <RecoilRoot>
         <AuthCheck>
-          <DefaultHeader />
-          <Component {...pageProps} />
+          <DefaultView>
+            <Component {...pageProps} />
+          </DefaultView>
         </AuthCheck>
       </RecoilRoot>
     </>

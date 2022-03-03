@@ -1,15 +1,15 @@
 import { VFC } from 'react'
-import styles from './styles/DefaultHeader.module.scss'
+import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRecoilValue } from 'recoil'
-import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { FaUserCircle } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 
-interface Props {}
-const DefaultHeader: VFC<Props> = () => {
-  const isLogin: loginState = useRecoilValue(isLoginSelector)
+interface Props {
+  isLogin: boolean
+}
+
+const DefaultHeader: VFC<Props> = (props: Props) => {
 
   const onClickIcon = () => {
     // eslint-disable-next-line no-console
@@ -49,7 +49,7 @@ const DefaultHeader: VFC<Props> = () => {
             </a>
           </Link>
         </div>
-        {userIcon(isLogin)}
+        {userIcon(props.isLogin)}
       </header>
     </>
   )
