@@ -44,6 +44,7 @@ export const loginAction = async (email: string, pin: string): Promise<UserRespo
 export const logoutAction = async (): Promise<void> => {
   await signOut(auth)
     .then(() => {
+      // eslint-disable-next-line no-console
       console.log('logout')
     })
     .catch((e) => {
