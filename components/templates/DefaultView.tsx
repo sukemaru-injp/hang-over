@@ -13,12 +13,10 @@ const DefaultView: FC<Props> = (props: Props) => {
 
   return (
     <>
+      <Header
+        isLogin={isLogin} />
       <PageWrapper>
-        <Header
-          isLogin={isLogin} />
-        <main>
-          {props.children}
-        </main>
+        {props.children}
       </PageWrapper>
       <Footer />
     </>
