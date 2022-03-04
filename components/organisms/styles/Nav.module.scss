@@ -1,24 +1,30 @@
 @use '../../../styles/mixin.scss';
+$cHover: #f0f8ff;
 
 .Nav {
   width: 200px;
+  padding: 5px;
+  background-color: #fff;
 
   &__lists {
     width: 100%;
   }
   &__list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ddd;
     height: 40px;
-    border: 1px solid #808080;
-    color: #fff;
+    margin: 5px 0 0;
+  }
+
+  &__button {
+    height: 100%;
+    width: 100%;
     transition: all 0.2s;
     padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    color: #000;
 
     &:hover {
-      background-color: #808080;
+      background-color: $cHover;
       cursor: pointer;
     }
   }
