@@ -12,7 +12,7 @@ const Nav: VFC<Props> = () => {
           <ul>
             <li className={styles.Nav__list}>
               <button className={styles.Nav__button}>
-                <Link passHref href="/">
+                <Link passHref href="/users">
                   <a>ユーザー管理</a>
                 </Link>
               </button>

@@ -27,7 +27,6 @@ const Login: VFC<Props> = () => {
   })
 
   const submit = async () => {
-    console.log('ok')
     try {
       const data = await loginAction(email, pin)
       if (!data) { return }

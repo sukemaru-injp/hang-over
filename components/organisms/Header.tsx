@@ -1,4 +1,4 @@
-import { VFC, useState, useEffect, memo } from 'react'
+import { VFC, useState, memo } from 'react'
 import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,12 +12,6 @@ interface Props {
 
 const DefaultHeader: VFC<Props> = (props: Props) => {
   const [navState, setNavState] = useState<boolean>(false)
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('effect', navState)
-  }, [navState])
-
   const userIcon = (login: boolean) => {
     if (login) {
       return (
