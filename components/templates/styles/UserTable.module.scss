@@ -1,0 +1,15 @@
+$Main: #C76E5C;
+
+.UserTable {
+  width: 90vw;
+  margin: 15px auto;
+
+  &__head {
+    padding: 20px 10px;
+    border-bottom: 1px solid #bbb;
+  }
+
+  &__content {
+    padding: 10px;
+  }
+}
