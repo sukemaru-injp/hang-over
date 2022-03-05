@@ -16,7 +16,6 @@ const UsersPage: NextPage = () => {
   useEffect(() => {
     if (!isLogin) { router.replace('/dashboard')}
   }, [])
-  console.log(users)
   return (
     <>
       <div className={styles.UsersPage}>
