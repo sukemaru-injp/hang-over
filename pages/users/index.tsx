@@ -8,6 +8,8 @@ import type { UserData } from '../../store/users/types'
 import UserTable from '../../components/templates/UserTable'
 import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { useRouter } from 'next/router'
+import PageHeader from '../../components/molecules/pageHeader'
+import AddButton from '../../components/molecules/AddButton'
 
 const UsersPage: NextPage = () => {
   const users: UserData[] = useRecoilValue(userList)
@@ -19,7 +21,13 @@ const UsersPage: NextPage = () => {
   return (
     <>
       <div className={styles.UsersPage}>
-        <h2 className={styles.UsersPage__title}>ユーザー管理</h2>
+        <PageHeader
+          title='ユーザー管理'>
+          <div className={styles.UsersPage__buttons}>
+            <AddButton
+              onClick={() => console.log('add')} />
+          </div>
+        </PageHeader>
         <UserList>
           <UserTable
             users={users} />

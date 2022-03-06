@@ -86,9 +86,10 @@ const Login: VFC<Props> = () => {
           </div>
           <div className={styles.Login__innerWrapper}>
             <Button
-              text="ログイン"
               disabled={isEmptyError || !allInputted}
-              onClick={() => submit()} />
+              onClick={() => submit()}>
+              <span>ログイン</span>
+            </Button>
           </div>
         </CardWithTitle>
       </div>

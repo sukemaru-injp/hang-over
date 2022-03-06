@@ -4,9 +4,8 @@ $Main: #C76E5C;
 .UsersPage {
   padding: 10px;
 
-  &__title {
-    color: $Main;
-    font-weight: bold;
-    font-size: 1.4rem;
+  &__buttons {
+    display: flex;
+    gap: 10px;
   }
 }

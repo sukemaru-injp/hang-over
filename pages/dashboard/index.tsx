@@ -27,8 +27,9 @@ const DashboardPage: NextPage = () => {
         <>
           <h1>ダッシュボードビュー</h1>
           <Button
-            text="ログアウト"
-            onClick={() => onClickLogout()}/>
+            onClick={() => onClickLogout()}>
+            <span>ログアウト</span>
+          </Button>
         </>
       )
     } else {

@@ -1,0 +1,13 @@
+$Main: #C76E5C;
+
+.PageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    color: $Main;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+}

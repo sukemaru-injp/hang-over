@@ -5,6 +5,9 @@ $cMain: #C76E5C;
   color: #fff;
   padding: 15px 25px;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:disabled {
     background-color: #bbb;
