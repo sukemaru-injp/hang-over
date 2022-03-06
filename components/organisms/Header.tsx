@@ -3,8 +3,8 @@ import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaUserCircle } from 'react-icons/fa'
-import { IconContext } from 'react-icons'
 import Nav from '../organisms/Nav'
+import IconWrapper from '../atoms/IconWrapper'
 
 interface Props {
   isLogin: boolean
@@ -18,11 +18,13 @@ const DefaultHeader: VFC<Props> = (props: Props) => {
         <div
           className={styles.Header__inner}
           onClick={() => setNavState(!navState)}>
-          <IconContext.Provider value={{ color: '#FFFFA6', size: '30px' }}>
+          <IconWrapper
+            color='#FFFFA6'
+            size='30px'>
             <div className={styles.Header__iconWrapper}>
               <FaUserCircle />
             </div>
-          </IconContext.Provider>
+          </IconWrapper>
         </div>
       )
     } else {
