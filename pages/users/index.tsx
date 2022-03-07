@@ -8,7 +8,7 @@ import type { UserData } from '../../store/users/types'
 import UserTable from '../../components/templates/UserTable'
 import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { useRouter } from 'next/router'
-import PageHeader from '../../components/molecules/pageHeader'
+import PageHeader from '../../components/molecules/PageHeader'
 import AddButton from '../../components/molecules/AddButton'
 
 const UsersPage: NextPage = () => {
@@ -18,6 +18,7 @@ const UsersPage: NextPage = () => {
   useEffect(() => {
     if (!isLogin) { router.replace('/dashboard')}
   }, [])
+
   return (
     <>
       <div className={styles.UsersPage}>
