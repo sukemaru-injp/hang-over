@@ -69,6 +69,7 @@ const Login: VFC<Props> = () => {
               <InputAndLabel
                 label='Email'
                 value={email}
+                isMust
                 onChange={(event) => onInputEmail(event)} />
               <div className={styles.Login__errorArea}>
                 <p className={styles.Login__error}>{error?.email ? error.email : ''}</p>
@@ -78,13 +79,14 @@ const Login: VFC<Props> = () => {
               <InputAndLabel
                 label='Password'
                 value={pin}
+                isMust
                 onChange={(event) => onInputPin(event)} />
               <div className={styles.Login__errorArea}>
                 <p className={styles.Login__error}>{error?.pin ? error.pin : ''}</p>
               </div>
             </div>
           </div>
-          <div className={styles.Login__innerWrapper}>
+          <div className={styles.Login__buttonWrapper}>
             <Button
               disabled={isEmptyError || !allInputted}
               onClick={() => submit()}>
