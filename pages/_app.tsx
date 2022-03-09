@@ -2,17 +2,17 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 import DefaultView from '../components/templates/DefaultView'
-import AuthCheck from '../components/provider/AuthProvider'
+import AuthProvider from '../components/provider/AuthProvider'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <RecoilRoot>
-        <AuthCheck>
+        <AuthProvider>
           <DefaultView>
             <Component {...pageProps} />
           </DefaultView>
-        </AuthCheck>
+        </AuthProvider>
       </RecoilRoot>
     </>
   )

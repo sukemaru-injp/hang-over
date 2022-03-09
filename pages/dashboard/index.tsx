@@ -10,7 +10,6 @@ const DashboardPage: NextPage = () => {
   const { isLogin } = useRecoilValue<Auth>(authState)
   const resetAuthState = useResetRecoilState(authState)
 
-  console.log('user', isLogin)
   const onClickLogout = async () => {
     try {
       await logoutAction()
