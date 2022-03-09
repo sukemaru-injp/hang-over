@@ -38,7 +38,7 @@ const DefaultHeader: VFC<Props> = (props: Props) => {
     if (isShow) {
       return (
         <div className={styles.Header__navArea}>
-          <Nav />
+          <Nav onClick={() => setNavState(false)}/>
         </div>
       )
     } else {
