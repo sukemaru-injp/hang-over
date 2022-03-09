@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useEffect } from 'react'
 import styles from './styles/UsersPage.module.scss'
-import UserList from '../../components/hooks/UserList'
+import UserList from '../../components/provider/UserListProvider'
 import { useRecoilValue } from 'recoil'
 import { userList } from '../../store/users/atom'
 import type { UserData } from '../../store/users/types'
