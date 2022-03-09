@@ -17,6 +17,7 @@ const UsersPage: NextPage = () => {
   const router = useRouter()
   useEffect(() => {
     if (!isLogin) { router.replace('/dashboard')}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
