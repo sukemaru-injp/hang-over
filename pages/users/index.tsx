@@ -10,6 +10,7 @@ import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { useRouter } from 'next/router'
 import PageHeader from '../../components/molecules/PageHeader'
 import AddButton from '../../components/molecules/AddButton'
+import Link from 'next/link'
 
 const UsersPage: NextPage = () => {
   const users: UserData[] = useRecoilValue(userList)
@@ -26,8 +27,12 @@ const UsersPage: NextPage = () => {
         <PageHeader
           title='ユーザー管理'>
           <div className={styles.UsersPage__buttons}>
-            <AddButton
-              onClick={() => console.log('add')} />
+            <Link href='/users/new' passHref>
+              <a>
+                <AddButton
+                  onClick={() => {}} />
+              </a>
+            </Link>
           </div>
         </PageHeader>
         <UserListProvider>

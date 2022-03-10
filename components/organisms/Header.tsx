@@ -1,17 +1,23 @@
-import { VFC, useState, memo } from 'react'
+import { VFC, useState, memo, useEffect } from 'react'
 import styles from './styles/Header.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaUserCircle } from 'react-icons/fa'
 import Nav from '../organisms/Nav'
 import IconWrapper from '../atoms/IconWrapper'
+import { useRouter } from 'next/router'
 
 interface Props {
   isLogin: boolean
 }
 
 const DefaultHeader: VFC<Props> = (props: Props) => {
+  const router = useRouter()
   const [navState, setNavState] = useState<boolean>(false)
+  useEffect(() => {
+    setNavState(false)
+  }, [router])
+
   const userIcon = (login: boolean) => {
     if (login) {
       return (

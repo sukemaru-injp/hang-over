@@ -3,7 +3,7 @@ import styles from './styles/PageHeader.module.scss'
 
 interface Props {
   title: string,
-  children: ReactNode
+  children?: ReactNode
 }
 const PageHeader: FC<Props> = (props: Props) => {
   return (
