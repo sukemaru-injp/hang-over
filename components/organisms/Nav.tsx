@@ -1,9 +1,9 @@
 import { VFC, MouseEvent } from 'react'
 import styles from './styles/Nav.module.scss'
-import Link from 'next/link'
 import Card from '../atoms/Card'
 import IconWrapper from '../atoms/IconWrapper'
 import { RiCloseLine } from 'react-icons/ri'
+import LinkWrapper from '../atoms/LinkWrapper'
 
 interface Props {
     // eslint-disable-next-line no-unused-vars
@@ -22,9 +22,16 @@ const Nav: VFC<Props> = (props: Props) => {
           <ul>
             <li className={styles.Nav__list}>
               <button className={styles.Nav__button}>
-                <Link passHref href="/users">
-                  <a>ユーザー管理</a>
-                </Link>
+                <LinkWrapper link='/dashboard'>
+                  トップページ
+                </LinkWrapper>
+              </button>
+            </li>
+            <li className={styles.Nav__list}>
+              <button className={styles.Nav__button}>
+                <LinkWrapper link='/users'>
+                  ユーザー管理
+                </LinkWrapper>
               </button>
             </li>
             <li className={styles.Nav__list}>

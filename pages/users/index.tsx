@@ -10,7 +10,7 @@ import { isLoginSelector, loginState } from '../../store/auth/selector'
 import { useRouter } from 'next/router'
 import PageHeader from '../../components/molecules/PageHeader'
 import AddButton from '../../components/molecules/AddButton'
-import Link from 'next/link'
+import LinkWrapper from '../../components/atoms/LinkWrapper'
 
 const UsersPage: NextPage = () => {
   const users: UserData[] = useRecoilValue(userList)
@@ -27,12 +27,10 @@ const UsersPage: NextPage = () => {
         <PageHeader
           title='ユーザー管理'>
           <div className={styles.UsersPage__buttons}>
-            <Link href='/users/new' passHref>
-              <a>
-                <AddButton
-                  onClick={() => {}} />
-              </a>
-            </Link>
+            <LinkWrapper link='/users/new'>
+              <AddButton
+                onClick={() => {}} />
+            </LinkWrapper>
           </div>
         </PageHeader>
         <UserListProvider>
