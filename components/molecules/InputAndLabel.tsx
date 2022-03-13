@@ -8,7 +8,6 @@ interface Props extends TextInputProps {
 }
 
 const InputAndLabel: FC<Props> = (props: Props) => {
-  console.log(props)
   const mustLabel = (must: boolean) => {
     if (must) {
       return (
