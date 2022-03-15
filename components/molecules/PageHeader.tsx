@@ -10,7 +10,7 @@ const PageHeader: FC<Props> = (props: Props) => {
     <>
       <div className={styles.PageHeader}>
         <h2 className={styles.PageHeader__title}>{props.title}</h2>
-        {props.children}
+        {props?.children || <></>}
       </div>
     </>
   )

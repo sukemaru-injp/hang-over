@@ -10,7 +10,7 @@ const RestaurantPage: NextPage = () => {
       <div className={styles.RestaurantPage}>
         <PageHeader
           title='店舗管理'>
-          <LinkWrapper link='/'>
+          <LinkWrapper link='/restaurant/new'>
             <AddButton
               onClick={() => {}} />
           </LinkWrapper>
