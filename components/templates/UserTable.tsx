@@ -4,7 +4,7 @@ import type { UserData } from '../../store/users/types'
 import { map } from 'lodash'
 import Card from '../atoms/Card'
 import IconWrapper from '../atoms/IconWrapper'
-import { BsCircle, BsPersonCheck } from 'react-icons/bs'
+import { BsFillPersonXFill, BsPersonCheck } from 'react-icons/bs'
 import { useRecoilValue } from 'recoil'
 import { authState } from '../../store/auth/atom'
 
@@ -25,7 +25,7 @@ const UserTable: VFC<Props> = (props: Props) => {
     } else {
       return (
         <IconWrapper color='#000'>
-          <BsCircle />
+          <BsFillPersonXFill />
         </IconWrapper>  
       )
     }
