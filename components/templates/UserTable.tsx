@@ -5,14 +5,18 @@ import { map } from 'lodash'
 import Card from '../atoms/Card'
 import IconWrapper from '../atoms/IconWrapper'
 import { BsFillPersonXFill, BsPersonCheck } from 'react-icons/bs'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { authState } from '../../store/auth/atom'
+import { loadingState } from '../../store/loading/atom'
+import { updateUserInfo } from '../../src/auth'
 
 interface Props {
   users: UserData[]
 }
 const UserTable: VFC<Props> = (props: Props) => {
   const { manage_flag } = useRecoilValue(authState)
+  const setLoading = useSetRecoilState(loadingState)
+
   const headerLabel: string[] = ['名前', 'Email', '管理フラグ', '操作']
 
   const manageIcon = (flag: boolean) => {
@@ -30,8 +34,30 @@ const UserTable: VFC<Props> = (props: Props) => {
       )
     }
   }
-  const _clickIcon = () => {
-    console.log('change-status')
+  const _clickIcon = async (user: UserData) => {
+    setLoading(true)
+    if (user?.manage_flag) {
+      try {
+        await updateUserInfo(user.uid, {
+          ...user,
+          manage_flag: false
+        })
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e)
+      }  
+    } else {
+      try {
+        await updateUserInfo(user.uid, {
+          ...user,
+          manage_flag: true
+        })
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e)
+      }  
+    }
+    setLoading(false)
   }
 
   return (
@@ -57,7 +83,7 @@ const UserTable: VFC<Props> = (props: Props) => {
                     <button
                       className={styles.UserTable__iconWrapper}
                       disabled={!manage_flag}
-                      onClick={() => _clickIcon()}>
+                      onClick={() => _clickIcon(user)}>
                       {manageIcon(user?.manage_flag || false)}
                     </button>
                   </td>

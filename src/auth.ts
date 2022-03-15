@@ -1,15 +1,17 @@
 import { signInWithEmailAndPassword, UserCredential, signOut } from 'firebase/auth'
 import { auth, firestore } from '../libs/Firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { getPrefix } from './misc'
+import { UserData } from '../store/users/types'
 
 const prefix = getPrefix()
 
-interface UserResponse {
-  email: string,
-  uid: string,
-  name: string,
-  createData: any
+export const updateUserInfo = async (uid: string, user: UserData): Promise<void> => {
+  try {
+    await updateDoc(doc(firestore, `${prefix}users`, `${uid}`), user)
+  } catch (e) {
+    Promise.reject(e)
+  }
 }
 
 export const getUserInfoByFireStore = async (uid: string|null) => {
@@ -23,7 +25,7 @@ export const getUserInfoByFireStore = async (uid: string|null) => {
   }
 }
 
-export const loginAction = async (email: string, pin: string): Promise<UserResponse|null> => {
+export const loginAction = async (email: string, pin: string): Promise<UserData|null> => {
   let res = null
   await signInWithEmailAndPassword(auth, email, pin)
     .then(async (userCredential: UserCredential) => {
