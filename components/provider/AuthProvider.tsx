@@ -29,6 +29,7 @@ const AuthCheck: FC<Props> = (props: Props) => {
               name: res?.name || '',
               email: res?.email || '',
               uid: res?.uid || '',
+              manage_flag: res?.manage_flag || false,
               isLogin: true }
           })
         } catch (e) {

@@ -1,4 +1,5 @@
 $Main: #C76E5C;
+$cHover: #f0f8ff;
 
 .UserTable {
   width: 90vw;
@@ -11,5 +12,20 @@ $Main: #C76E5C;
 
   &__content {
     padding: 10px;
+  }
+
+  &__iconWrapper {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $cHover;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      background-color: #bbb;
+    }
   }
 }

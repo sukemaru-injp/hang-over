@@ -3,12 +3,37 @@ import styles from './styles/UserTable.module.scss'
 import type { UserData } from '../../store/users/types'
 import { map } from 'lodash'
 import Card from '../atoms/Card'
+import IconWrapper from '../atoms/IconWrapper'
+import { BsCircle, BsPersonCheck } from 'react-icons/bs'
+import { useRecoilValue } from 'recoil'
+import { authState } from '../../store/auth/atom'
 
 interface Props {
   users: UserData[]
 }
 const UserTable: VFC<Props> = (props: Props) => {
-  const headerLabel: string[] = ['名前', 'Email', '操作']
+  const { manage_flag } = useRecoilValue(authState)
+  const headerLabel: string[] = ['名前', 'Email', '管理フラグ', '操作']
+
+  const manageIcon = (flag: boolean) => {
+    if (flag) {
+      return (
+        <IconWrapper color='#000'>
+          <BsPersonCheck />
+        </IconWrapper>
+      )  
+    } else {
+      return (
+        <IconWrapper color='#000'>
+          <BsCircle />
+        </IconWrapper>  
+      )
+    }
+  }
+  const _clickIcon = () => {
+    console.log('change-status')
+  }
+
   return (
     <>
       <Card>
@@ -28,6 +53,14 @@ const UserTable: VFC<Props> = (props: Props) => {
                 <tr key={`user${idx}`}>
                   <td className={styles.UserTable__content}>{user.name}</td>
                   <td className={styles.UserTable__content}>{user.email}</td>
+                  <td className={styles.UserTable__content}>
+                    <button
+                      className={styles.UserTable__iconWrapper}
+                      disabled={!manage_flag}
+                      onClick={() => _clickIcon()}>
+                      {manageIcon(user?.manage_flag || false)}
+                    </button>
+                  </td>
                   <td className={styles.UserTable__content}>ボタン</td>
                 </tr>
               )

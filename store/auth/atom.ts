@@ -4,7 +4,8 @@ export interface Auth {
   isLogin: boolean,
   name: string,
   uid: string,
-  email: string
+  email: string,
+  manage_flag: boolean
 }
 
 export const authState = atom<Auth>({
@@ -13,6 +14,7 @@ export const authState = atom<Auth>({
     isLogin: false,
     name: '',
     uid: '',
-    email: ''
+    email: '',
+    manage_flag: false
   }
 })
