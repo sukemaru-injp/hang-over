@@ -3,15 +3,27 @@ import styles from './styles/DashboardPage.module.scss'
 import Login from '../../components/templates/Login'
 import { useRecoilValue } from 'recoil'
 import { authState, Auth } from '../../store/auth/atom'
+import toast, { Toaster } from 'react-hot-toast'
+import { useEffect } from 'react'
 
 const DashboardPage: NextPage = () => {
   const { isLogin } = useRecoilValue<Auth>(authState)
+
+  const notify = () => toast.success('ログインしました', {
+    duration: 3000,
+    position: 'top-center'
+  })
+
+  useEffect(() => {
+    notify()
+  }, [isLogin])
   
   const dashboardView = (login: boolean) => {
     if (login) {
       return (
         <>
           <h1>ダッシュボードビュー</h1>
+          <Toaster />
         </>
       )
     } else {
