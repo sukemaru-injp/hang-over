@@ -8,6 +8,7 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil'
 import { authState }from '../../store/auth/atom'
 import { loadingState } from '../../store/loading/atom'
 import { logoutAction } from '../../src/auth'
+import { useRouter } from 'next/router'
 
 interface Props {
     // eslint-disable-next-line no-unused-vars
@@ -16,12 +17,14 @@ interface Props {
 const Nav: VFC<Props> = (props: Props) => {
   const resetAuthState = useResetRecoilState(authState)
   const setLoading = useSetRecoilState(loadingState)
+  const router = useRouter()
 
   const onClickLogout = async () => {
     setLoading(true)
     try {
       await logoutAction()
       resetAuthState()
+      router.replace('/dashboard')
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)

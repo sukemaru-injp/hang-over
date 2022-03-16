@@ -1,6 +1,12 @@
 .Input {
   padding: 10px 5px;
+  font-size: 16px;
   border-radius: 5px;
   outline: solid 1px #ccc;
   text-align: left;
+  min-width: 20vw;
+
+  &::placeholder {
+    color: #bbb;
+  }
 }
