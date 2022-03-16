@@ -7,7 +7,7 @@ const NewUserPage: NextPage = () => {
     <>
       <div className={styles.NewUserPage}>
         <PageHeader
-          title='新規ユーザー作成' />
+          title='新規登録 - ユーザー' />
       </div>
     </>
   )

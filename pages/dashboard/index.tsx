@@ -22,8 +22,10 @@ const DashboardPage: NextPage = () => {
     if (login) {
       return (
         <>
-          <h1>ダッシュボードビュー</h1>
-          <Toaster />
+          <div className={styles.DashboardPage}>
+            <h1>ダッシュボードビュー</h1>
+            <Toaster />
+          </div>
         </>
       )
     } else {
