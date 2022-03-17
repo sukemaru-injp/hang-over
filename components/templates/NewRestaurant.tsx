@@ -11,6 +11,7 @@ const NewRestaurant: FC<Props> = () => {
   const [name, setName] = useState('')
   const [station, setStationName] = useState('')
   const [tel, setTel] = useState('')
+  const [postalCode, setPostalCode] = useState('')
   const [overview, setOverview] = useState('')
 
   const onSubmit = () => {
@@ -39,6 +40,14 @@ const NewRestaurant: FC<Props> = () => {
             placeholder='例)新橋駅'
             value={station}
             onChange={(e) => setStationName(e.target.value)} />
+        </div>
+        <div className={styles.NewRestaurant__content}>
+          <InputAndLabel
+            label='郵便番号'
+            isMust
+            placeholder='1234567'
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)} />
         </div>
         <div className={styles.NewRestaurant__content}>
           <InputAndLabel
