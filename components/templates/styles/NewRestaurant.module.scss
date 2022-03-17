@@ -2,6 +2,13 @@
   padding: 0 20px;
 
   &__content {
-    margin: 20px 10px;
+    margin: 30px 10px;
+    text-align: center;
+  }
+
+  &__buttonArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

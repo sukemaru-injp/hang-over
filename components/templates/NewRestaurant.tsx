@@ -5,6 +5,7 @@ import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 
 interface Props {}
+
 const NewRestaurant: FC<Props> = () => {
   const [name, setName] = useState('')
   const [station, setStationName] = useState('')
