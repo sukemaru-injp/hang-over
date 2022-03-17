@@ -1,15 +1,16 @@
 import { FC, ChangeEvent } from 'react'
 import styles from './styles/Textarea.module.scss'
 
-interface TextareaProps {
+export interface TextareaProps {
   value: string
   name?: string
   placeholder?: string
   rows?: number
   cols?: number
   // eslint-disable-next-line no-unused-vars
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange: (event?: ChangeEvent<HTMLTextAreaElement>) => void
 }
+
 const Textarea: FC<TextareaProps> = (props: TextareaProps) => {
   return (
     <>
@@ -20,7 +21,7 @@ const Textarea: FC<TextareaProps> = (props: TextareaProps) => {
         placeholder={props?.placeholder || ''}
         rows={props?.rows || 8}
         cols={props?.cols || 20}
-        onChange={() => props?.onChange} />
+        onChange={props.onChange} />
     </>
   )
 }
