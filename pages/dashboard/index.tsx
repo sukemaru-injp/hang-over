@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import { useEffect } from 'react'
 import styles from './styles/DashboardPage.module.scss'
 import Login from '../../components/templates/Login'
 import { useRecoilValue } from 'recoil'
 import { authState, Auth } from '../../store/auth/atom'
 import toast, { Toaster } from 'react-hot-toast'
-import { useEffect } from 'react'
+import DashboardMain from '../../components/templates/DashboardMain'
 
 const DashboardPage: NextPage = () => {
   const { isLogin } = useRecoilValue<Auth>(authState)
@@ -24,6 +25,7 @@ const DashboardPage: NextPage = () => {
         <>
           <div className={styles.DashboardPage}>
             <h1>ダッシュボードビュー</h1>
+            <DashboardMain />
             <Toaster />
           </div>
         </>
