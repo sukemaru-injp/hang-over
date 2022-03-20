@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import { useRecoilValue } from 'recoil'
 import { isLoginSelector, loginState } from '../../store/auth/selector'
-import PageWrapper from '../atoms/PageWrapper'
+import MainWrapper from '../atoms/MainWrapper'
 import Header from '../organisms/Header'
 import Footer from '../organisms/Footer'
 
@@ -15,9 +15,9 @@ const DefaultView: FC<Props> = (props: Props) => {
     <>
       <Header
         isLogin={isLogin} />
-      <PageWrapper>
+      <MainWrapper>
         {props.children}
-      </PageWrapper>
+      </MainWrapper>
       <Footer />
     </>
   )

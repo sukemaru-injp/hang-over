@@ -1,9 +1,10 @@
-interface SelectItems {
+export interface SelectItems {
   value: number|string,
   label: string
 }
 
 export const PREFECTURE_LIST: SelectItems[] = [
+  { value: 0, label: '未選択' },
   { value: 1, label: '北海道' },
   { value: 2 , label: '青森県' },
   { value: 3, label: '岩手県' },

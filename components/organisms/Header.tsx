@@ -55,7 +55,7 @@ const DefaultHeader: VFC<Props> = (props: Props) => {
     <>
       <header className={styles.Header}>
         <div className={styles.Header__inner}>
-          <LinkWrapper link="/">
+          <LinkWrapper link="/dashboard">
             <Image
               src="/image/title-logo.png"
               width={95}
