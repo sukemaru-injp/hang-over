@@ -6,8 +6,11 @@ import SelectBoxAndLabel from '../molecules/SelectBoxAndLabel'
 import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { PREFECTURE_LIST } from '../../src/const'
+import toast, { Toaster } from 'react-hot-toast'
 
 interface Props {}
+
+const POSTAL_CODE_REGEX = /^\d{7}$/
 
 const NewRestaurant: FC<Props> = () => {
   const [name, setName] = useState('')
@@ -20,9 +23,17 @@ const NewRestaurant: FC<Props> = () => {
 
   const allInputted = name && station && tel && postalCode && address && prefecture && overview
 
-  const onSubmit = () => {
+  const notifyError = (message: string) => toast.error(message, {
+    duration: 3000,
+    position: 'top-center'
+  })
+
+  const onSubmit = () => {  
     const id = uuidv4()
     console.log(id.split('-'))
+    if (!POSTAL_CODE_REGEX.test(postalCode)) {
+      return notifyError('郵便番号が正しくありません')
+    }
   }
 
   return (
@@ -30,7 +41,7 @@ const NewRestaurant: FC<Props> = () => {
       <div className={styles.NewRestaurant}>
         <div className={styles.NewRestaurant__content}>
           <InputAndLabel
-            label='名前'
+            label='店名'
             isMust
             value={name}
             onChange={(e) => setName(e.target.value)} />
@@ -91,6 +102,7 @@ const NewRestaurant: FC<Props> = () => {
           </Button>
         </div>
       </div>
+      <Toaster />
     </>
   )
 }
