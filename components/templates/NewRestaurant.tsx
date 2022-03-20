@@ -11,6 +11,7 @@ import toast, { Toaster } from 'react-hot-toast'
 interface Props {}
 
 const POSTAL_CODE_REGEX = /^\d{7}$/
+const TEL_REGEX = /^0[0-9]{9,10}$/
 
 const NewRestaurant: FC<Props> = () => {
   const [name, setName] = useState('')
@@ -33,6 +34,9 @@ const NewRestaurant: FC<Props> = () => {
     console.log(id.split('-'))
     if (!POSTAL_CODE_REGEX.test(postalCode)) {
       return notifyError('郵便番号が正しくありません')
+    }
+    if (!TEL_REGEX.test(tel)) {
+      return notifyError('連絡先が正しくありません')
     }
   }
 
