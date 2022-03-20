@@ -1,4 +1,4 @@
-import { VFC, MouseEvent } from 'react'
+import { VFC } from 'react'
 import styles from './styles/UserTable.module.scss'
 import type { UserData } from '../../store/users/types'
 import { map } from 'lodash'
@@ -61,8 +61,8 @@ const UserTable: VFC<Props> = (props: Props) => {
     setLoading(false)
   }
 
-  const onClickDelete = (user: UserData, e: MouseEvent<HTMLButtonElement, MouseEvent>|undefined) => {
-    console.log('delete', user, e)
+  const onClickDelete = (user: UserData) => {
+    console.log('delete', user)
   }
 
   return (
@@ -96,7 +96,7 @@ const UserTable: VFC<Props> = (props: Props) => {
                     <Button
                       color='delete'
                       type='button'
-                      onClick={(event) => onClickDelete(user, event)}>
+                      onClick={() => onClickDelete(user)}>
                       削除
                     </Button>
                   </td>
