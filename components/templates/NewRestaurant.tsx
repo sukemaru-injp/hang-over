@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, FormEvent } from 'react'
 import styles from './styles/NewRestaurant.module.scss'
 import InputAndLabel from '../molecules/InputAndLabel'
 import TextareaAndLabel from '../molecules/TextareaAndLabel'
@@ -29,7 +29,8 @@ const NewRestaurant: FC<Props> = () => {
     position: 'top-center'
   })
 
-  const onSubmit = () => {  
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const id = uuidv4()
     console.log(id.split('-'))
     if (!POSTAL_CODE_REGEX.test(postalCode)) {
@@ -43,68 +44,71 @@ const NewRestaurant: FC<Props> = () => {
   return (
     <>
       <div className={styles.NewRestaurant}>
-        <div className={styles.NewRestaurant__content}>
-          <InputAndLabel
-            label='店名'
-            isMust
-            value={name}
-            onChange={(e) => setName(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <InputAndLabel
-            label='郵便番号'
-            isMust
-            placeholder='1234567'
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <SelectBoxAndLabel
-            label='都道府県'
-            isMust
-            options={PREFECTURE_LIST}
-            onChange={(e) => setPrefecture(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <InputAndLabel
-            label='住所'
-            isMust
-            placeholder='港区新橋２丁目１６−１'
-            value={address}
-            onChange={(e) => setAddress(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <InputAndLabel
-            label='最寄駅'
-            isMust
-            placeholder='例)新橋駅'
-            value={station}
-            onChange={(e) => setStationName(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <InputAndLabel
-            label='連絡先'
-            isMust
-            placeholder='09010101004'
-            value={tel}
-            onChange={(e) => setTel(e.target.value)} />
-        </div>
-        <div className={styles.NewRestaurant__content}>
-          <TextareaAndLabel
-            label='店舗概要'
-            isMust
-            placeholder='絶品焼き鳥のお店'
-            value={overview}
-            onChange={(e) => setOverview(e?.target?.value || '')
-            } />
-        </div>
-        <div className={styles.NewRestaurant__buttonArea}>
-          <Button
-            disabled={!allInputted}
-            onClick={() => onSubmit()}>
+        <form onSubmit={(e) => onSubmit(e)}>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='店名'
+              isMust
+              value={name}
+              onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='郵便番号'
+              isMust
+              placeholder='1234567'
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <SelectBoxAndLabel
+              label='都道府県'
+              isMust
+              options={PREFECTURE_LIST}
+              onChange={(e) => setPrefecture(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='住所'
+              isMust
+              placeholder='港区新橋２丁目１６−１'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='最寄駅'
+              isMust
+              placeholder='例)新橋駅'
+              value={station}
+              onChange={(e) => setStationName(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='連絡先'
+              isMust
+              placeholder='09010101004'
+              value={tel}
+              onChange={(e) => setTel(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <TextareaAndLabel
+              label='店舗概要'
+              isMust
+              placeholder='絶品焼き鳥のお店'
+              value={overview}
+              onChange={(e) => setOverview(e?.target?.value || '')
+              } />
+          </div>
+          <div className={styles.NewRestaurant__buttonArea}>
+            <Button
+              disabled={!allInputted}
+              type="submit"
+              onClick={() => {}}>
               作成する
-          </Button>
-        </div>
+            </Button>
+          </div>
+        </form>
       </div>
       <Toaster />
     </>
