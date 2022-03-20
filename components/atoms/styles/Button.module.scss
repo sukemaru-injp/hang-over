@@ -1,13 +1,23 @@
 $cMain: #C76E5C;
+$cDelete: #dc143c;
 
-.ButtonAtom {
-  background-color: $cMain;
+%Button {
   color: #fff;
   padding: 15px 25px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.ButtonAtom {
+  @extend %Button;
+  background-color: $cMain;
+
+  &__delete {
+    @extend %Button;
+    background-color: $cDelete;
+  }
 
   &:disabled {
     background-color: #bbb;

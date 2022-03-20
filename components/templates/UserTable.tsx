@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { VFC, MouseEvent } from 'react'
 import styles from './styles/UserTable.module.scss'
 import type { UserData } from '../../store/users/types'
 import { map } from 'lodash'
@@ -9,6 +9,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { authState } from '../../store/auth/atom'
 import { loadingState } from '../../store/loading/atom'
 import { updateUserInfo } from '../../src/auth'
+import Button from '../atoms/Button'
 
 interface Props {
   users: UserData[]
@@ -60,6 +61,10 @@ const UserTable: VFC<Props> = (props: Props) => {
     setLoading(false)
   }
 
+  const onClickDelete = (user: UserData, e: MouseEvent<HTMLButtonElement, MouseEvent>|undefined) => {
+    console.log('delete', user, e)
+  }
+
   return (
     <>
       <Card>
@@ -87,7 +92,14 @@ const UserTable: VFC<Props> = (props: Props) => {
                       {manageIcon(user?.manage_flag || false)}
                     </button>
                   </td>
-                  <td className={styles.UserTable__content}>ボタン</td>
+                  <td className={styles.UserTable__content}>
+                    <Button
+                      color='delete'
+                      type='button'
+                      onClick={(event) => onClickDelete(user, event)}>
+                      削除
+                    </Button>
+                  </td>
                 </tr>
               )
             })}

@@ -19,7 +19,8 @@ const NewRestaurant: FC<Props> = () => {
   const [tel, setTel] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
-  const [prefecture, setPrefecture] = useState('')
+  const [prefecture, setPrefecture] = useState(0)
+  const [access, setAccess] = useState('')
   const [overview, setOverview] = useState('')
 
   const allInputted = name && station && tel && postalCode && address && prefecture && overview
@@ -65,7 +66,7 @@ const NewRestaurant: FC<Props> = () => {
               label='都道府県'
               isMust
               options={PREFECTURE_LIST}
-              onChange={(e) => setPrefecture(e.target.value)} />
+              onChange={(e) => setPrefecture(Number(e.target.value))} />
           </div>
           <div className={styles.NewRestaurant__content}>
             <InputAndLabel
@@ -84,6 +85,13 @@ const NewRestaurant: FC<Props> = () => {
               onChange={(e) => setStationName(e.target.value)} />
           </div>
           <div className={styles.NewRestaurant__content}>
+            <TextareaAndLabel
+              label='アクセス情報'
+              placeholder='新橋駅から徒歩10分'
+              value={access}
+              onChange={(e) => setAccess(e?.target?.value || '')} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
             <InputAndLabel
               label='連絡先'
               isMust
@@ -97,8 +105,7 @@ const NewRestaurant: FC<Props> = () => {
               isMust
               placeholder='絶品焼き鳥のお店'
               value={overview}
-              onChange={(e) => setOverview(e?.target?.value || '')
-              } />
+              onChange={(e) => setOverview(e?.target?.value || '')} />
           </div>
           <div className={styles.NewRestaurant__buttonArea}>
             <Button
