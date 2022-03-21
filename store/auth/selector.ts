@@ -1,5 +1,6 @@
 import { selector } from 'recoil'
-import { authState, Auth } from './atom'
+import { authState } from './atom'
+import type { Auth } from './types' 
 
 export const authSelector = selector<Auth>({
   key: 'authSelector',

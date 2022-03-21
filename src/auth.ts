@@ -1,6 +1,6 @@
-import { signInWithEmailAndPassword, UserCredential, signOut } from 'firebase/auth'
+import { signInWithEmailAndPassword, UserCredential, signOut, createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, firestore } from '../libs/Firebase'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, setDoc, Timestamp } from 'firebase/firestore'
 import { getPrefix } from './misc'
 import { UserData } from '../store/users/types'
 
@@ -9,6 +9,20 @@ const prefix = getPrefix()
 export const updateUserInfo = async (uid: string, user: UserData): Promise<void> => {
   try {
     await updateDoc(doc(firestore, `${prefix}users`, `${uid}`), user)
+  } catch (e) {
+    Promise.reject(e)
+  }
+}
+
+const setFireStore = async (name: string, email: string|null, uid: string) => {
+  try {
+    await setDoc(doc(firestore, `${prefix}users`, `${uid}`), {
+      name,
+      email,
+      uid,
+      manage_flag: false,
+      createDate: Timestamp.fromDate(new Date())
+    })
   } catch (e) {
     Promise.reject(e)
   }
@@ -52,4 +66,24 @@ export const logoutAction = async (): Promise<void> => {
     .catch((e) => {
       Promise.reject(e)
     }) 
+}
+
+export const createAccountAction = async (email: string, pin: string, name: string): Promise<UserData|undefined|void> => {
+  let res
+  await createUserWithEmailAndPassword(auth, email, pin)
+    .then(async (userCredential: UserCredential) => {
+      const { user } = userCredential
+      const { email, uid } = user
+      await setFireStore(name, email, uid)
+      res = {
+        name,
+        email,
+        uid,
+        manage_flag: false
+      }
+    })
+    .catch((e) => {
+      Promise.reject(e)
+    })
+  return res
 }

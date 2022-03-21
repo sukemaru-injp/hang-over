@@ -1,12 +1,5 @@
 import { atom } from 'recoil'
-
-export interface Auth {
-  isLogin: boolean,
-  name: string,
-  uid: string,
-  email: string,
-  manage_flag: boolean
-}
+import type { Auth } from './types'
 
 export const authState = atom<Auth>({
   key: 'authState',

@@ -37,7 +37,7 @@ const UserTable: VFC<Props> = (props: Props) => {
   }
   const _clickIcon = async (user: UserData) => {
     setLoading(true)
-    if (user?.manage_flag) {
+    if (user.manage_flag) {
       try {
         await updateUserInfo(user.uid, {
           ...user,

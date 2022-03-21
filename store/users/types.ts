@@ -3,5 +3,5 @@ export type UserData = {
   name: string,
   uid: string,
   manage_flag: boolean
-  createDate: any
+  createDate?: any
 }

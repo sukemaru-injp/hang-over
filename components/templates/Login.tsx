@@ -6,7 +6,8 @@ import InputAndLabel from '../molecules/InputAndLabel'
 import { emailValidation, pinValidation } from '../../src/validation'
 import { loginAction } from '../../src/auth'
 import { useSetRecoilState } from 'recoil'
-import { authState, Auth } from '../../store/auth/atom'
+import { authState } from '../../store/auth/atom'
+import type { Auth } from '../../store/auth/types'
 
 interface Props {}
 
