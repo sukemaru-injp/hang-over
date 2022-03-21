@@ -10,6 +10,7 @@ import { authState } from '../../store/auth/atom'
 import { loadingState } from '../../store/loading/atom'
 import { updateUserInfo } from '../../src/auth'
 import Button from '../atoms/Button'
+import toast, { Toaster } from 'react-hot-toast'
 
 interface Props {
   users: UserData[]
@@ -17,6 +18,10 @@ interface Props {
 const UserTable: VFC<Props> = (props: Props) => {
   const { manage_flag } = useRecoilValue(authState)
   const setLoading = useSetRecoilState(loadingState)
+  const notifyError = (message: string) => toast.error(message, {
+    duration: 3000,
+    position: 'top-center'
+  })
 
   const headerLabel: string[] = ['名前', 'Email', '管理フラグ', '操作']
 
@@ -36,6 +41,9 @@ const UserTable: VFC<Props> = (props: Props) => {
     }
   }
   const _clickIcon = async (user: UserData) => {
+    if (!manage_flag) {
+      notifyError('管理者ではありません')
+    }
     setLoading(true)
     if (user.manage_flag) {
       try {
@@ -96,6 +104,7 @@ const UserTable: VFC<Props> = (props: Props) => {
                     <Button
                       color='delete'
                       type='button'
+                      disabled={!manage_flag}
                       onClick={() => onClickDelete(user)}>
                       削除
                     </Button>
@@ -106,6 +115,7 @@ const UserTable: VFC<Props> = (props: Props) => {
           </tbody>
         </table>
       </Card>
+      <Toaster />
     </>
   )
 }

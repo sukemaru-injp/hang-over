@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { authState, Auth } from '../../store/auth/atom'
+import { authState } from '../../store/auth/atom'
+import type { Auth } from '../../store/auth/types'
 import { loadingState } from '../../store/loading/atom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../libs/Firebase'

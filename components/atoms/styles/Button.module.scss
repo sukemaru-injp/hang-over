@@ -14,12 +14,16 @@ $cDelete: #dc143c;
   @extend %Button;
   background-color: $cMain;
 
+  &:disabled {
+    background-color: #bbb;
+  }
+
   &__delete {
     @extend %Button;
     background-color: $cDelete;
-  }
 
-  &:disabled {
-    background-color: #bbb;
+    &:disabled {
+      background-color: #bbb;
+    }  
   }
 }

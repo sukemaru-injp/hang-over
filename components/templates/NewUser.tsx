@@ -8,6 +8,8 @@ import { useSetRecoilState } from 'recoil'
 import { authState } from '../../store/auth/atom'
 import type { Auth } from '../../store/auth/types'
 import { createAccountAction } from '../../src/auth'
+import toast, { Toaster } from 'react-hot-toast'
+import { useRouter } from 'next/router'
 
 interface Props {}
 
@@ -28,6 +30,11 @@ const NewUser: VFC<Props> = () => {
     email: '',
     pin: ''
   })
+  const router = useRouter()
+  const notifySuccess = (message: string) => toast.success(message, {
+    duration: 3000,
+    position: 'top-center'
+  })
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -43,6 +50,8 @@ const NewUser: VFC<Props> = () => {
           manage_flag: data?.manage_flag || false,
           isLogin: true }
       })
+      notifySuccess('登録完了')
+      router.replace('/dashboard')
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -68,7 +77,7 @@ const NewUser: VFC<Props> = () => {
     <>
       <div className={styles.Login}>
         <CardWithTitle
-          title="新規作成">
+          title="新規登録">
           <form onSubmit={(e) => submit(e)}>
             <div className={styles.Login__inputArea}>
               <div className={styles.Login__innerWrapper}>
@@ -110,6 +119,7 @@ const NewUser: VFC<Props> = () => {
           </form>
         </CardWithTitle>
       </div>
+      <Toaster />
     </>
   )
 }
