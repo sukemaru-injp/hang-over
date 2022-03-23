@@ -2,6 +2,7 @@ import { initializeApp, getApps, FirebaseApp } from 'firebase/app'
 import { getAnalytics, Analytics } from 'firebase/analytics'
 import { getFirestore, Firestore } from 'firebase/firestore'
 import { getAuth, Auth } from 'firebase/auth'
+import { getStorage, FirebaseStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -17,12 +18,14 @@ let app: FirebaseApp
 let auth: Auth
 let firestore: Firestore
 let analytics: Analytics
+let storage: FirebaseStorage
 
 if (typeof window !== 'undefined' && !getApps().length) {
   app = initializeApp(firebaseConfig)
   auth = getAuth()
   firestore = getFirestore(),
   analytics = getAnalytics(app)
+  storage = getStorage(app)
 }
 
-export { app, auth, firestore, analytics }
+export { app, auth, firestore, analytics, storage }

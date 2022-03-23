@@ -119,6 +119,7 @@ const NewRestaurant: FC<Props> = () => {
             <FileInputAndLabel
               label='食べ物写真'
               multiple
+              isMust
               onChange={(e) => onChangeFile(e)}/>
           </div>
           <div className={styles.NewRestaurant__buttonArea}>
