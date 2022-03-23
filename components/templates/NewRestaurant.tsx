@@ -6,6 +6,8 @@ import SelectBoxAndLabel from '../molecules/SelectBoxAndLabel'
 import FileInputAndLabel from '../molecules/FileInputAndLabel'
 import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
+import { useSetRecoilState } from 'recoil'
+import { loadingState } from '../../store/loading/atom'
 import { PREFECTURE_LIST } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
 import { saveTestStorage } from '../../src/storage'
@@ -26,6 +28,8 @@ const NewRestaurant: FC<Props> = () => {
   const [overview, setOverview] = useState<string>('')
   const [foodImages, setFoodImages] = useState<FileList|null>(null)
 
+  const setLoading = useSetRecoilState(loadingState)
+
   const allInputted = name && station && tel && postalCode && address && prefecture && overview
 
   const notifyError = (message: string) => toast.error(message, {
@@ -33,7 +37,7 @@ const NewRestaurant: FC<Props> = () => {
     position: 'top-center'
   })
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const id = uuidv4().split('-')
     const restaurantId = id[0] + id[1] 
@@ -46,7 +50,14 @@ const NewRestaurant: FC<Props> = () => {
     if (!foodImages?.length) {
       return notifyError('食べ物の写真が欲しい！')
     }
-    saveTestStorage(restaurantId, foodImages)
+    setLoading(true)
+    try {
+      await saveTestStorage(restaurantId, foodImages)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+    setLoading(false)
   }
 
   const onChangeFoodsFile = (event: ChangeEvent<HTMLInputElement>) => {
