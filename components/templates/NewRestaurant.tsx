@@ -8,6 +8,7 @@ import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { PREFECTURE_LIST } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
+import { saveTestStorage } from '../../src/storage'
 
 interface Props {}
 
@@ -25,7 +26,7 @@ const NewRestaurant: FC<Props> = () => {
   const [overview, setOverview] = useState<string>('')
   const [foodImages, setFoodImages] = useState<FileList|null>(null)
 
-  const allInputted = name && station && tel && postalCode && address && prefecture && overview && foodImages?.length
+  const allInputted = name && station && tel && postalCode && address && prefecture && overview
 
   const notifyError = (message: string) => toast.error(message, {
     duration: 3000,
@@ -34,17 +35,21 @@ const NewRestaurant: FC<Props> = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const id = uuidv4()
-    console.log(id.split('-'))
+    const id = uuidv4().split('-')
+    const restaurantId = id[0] + id[1] 
     if (!POSTAL_CODE_REGEX.test(postalCode)) {
-      return notifyError('郵便番号が正しくありません')
+      return notifyError('郵便番号の形式が正しくありません')
     }
     if (!TEL_REGEX.test(tel)) {
-      return notifyError('連絡先が正しくありません')
+      return notifyError('連絡先の形式が正しくありません')
     }
+    if (!foodImages?.length) {
+      return notifyError('食べ物の写真が欲しい！')
+    }
+    saveTestStorage(restaurantId, foodImages)
   }
 
-  const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeFoodsFile = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (!files) { return }
     setFoodImages(event.target.files)
@@ -120,7 +125,8 @@ const NewRestaurant: FC<Props> = () => {
               label='食べ物写真'
               multiple
               isMust
-              onChange={(e) => onChangeFile(e)}/>
+              accept="image/*"
+              onChange={(e) => onChangeFoodsFile(e)}/>
           </div>
           <div className={styles.NewRestaurant__buttonArea}>
             <Button
