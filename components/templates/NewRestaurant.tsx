@@ -1,8 +1,9 @@
-import { FC, useState, FormEvent } from 'react'
+import { FC, useState, FormEvent, ChangeEvent } from 'react'
 import styles from './styles/NewRestaurant.module.scss'
 import InputAndLabel from '../molecules/InputAndLabel'
 import TextareaAndLabel from '../molecules/TextareaAndLabel'
 import SelectBoxAndLabel from '../molecules/SelectBoxAndLabel'
+import FileInputAndLabel from '../molecules/FileInputAndLabel'
 import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { PREFECTURE_LIST } from '../../src/const'
@@ -20,10 +21,11 @@ const NewRestaurant: FC<Props> = () => {
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [prefecture, setPrefecture] = useState(0)
-  const [access, setAccess] = useState('')
-  const [overview, setOverview] = useState('')
+  const [access, setAccess] = useState<string>('')
+  const [overview, setOverview] = useState<string>('')
+  const [foodImages, setFoodImages] = useState<FileList|null>(null)
 
-  const allInputted = name && station && tel && postalCode && address && prefecture && overview
+  const allInputted = name && station && tel && postalCode && address && prefecture && overview && foodImages?.length
 
   const notifyError = (message: string) => toast.error(message, {
     duration: 3000,
@@ -40,6 +42,12 @@ const NewRestaurant: FC<Props> = () => {
     if (!TEL_REGEX.test(tel)) {
       return notifyError('連絡先が正しくありません')
     }
+  }
+
+  const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (!files) { return }
+    setFoodImages(event.target.files)
   }
 
   return (
@@ -106,6 +114,12 @@ const NewRestaurant: FC<Props> = () => {
               placeholder='絶品焼き鳥のお店'
               value={overview}
               onChange={(e) => setOverview(e?.target?.value || '')} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <FileInputAndLabel
+              label='食べ物写真'
+              multiple
+              onChange={(e) => onChangeFile(e)}/>
           </div>
           <div className={styles.NewRestaurant__buttonArea}>
             <Button
