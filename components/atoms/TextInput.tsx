@@ -5,6 +5,7 @@ export interface TextInputProps {
   value: string
   placeholder?: string
   type?: string
+  name?: string
   // eslint-disable-next-line no-unused-vars
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
@@ -15,6 +16,7 @@ const TextInput: FC<TextInputProps> = (props: TextInputProps) => {
       <input
         className={styles.Input}
         value={props.value}
+        name={props?.name || ''}
         type={props?.type || 'text'}
         placeholder={props?.placeholder || ''}
         disabled={props?.disabled || false}

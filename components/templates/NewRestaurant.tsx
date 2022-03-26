@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent, ChangeEvent } from 'react'
+import { FC, useState, FormEvent, ChangeEvent, useRef } from 'react'
 import styles from './styles/NewRestaurant.module.scss'
 import InputAndLabel from '../molecules/InputAndLabel'
 import TextareaAndLabel from '../molecules/TextareaAndLabel'
@@ -8,7 +8,7 @@ import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { useSetRecoilState } from 'recoil'
 import { loadingState } from '../../store/loading/atom'
-import { PREFECTURE_LIST } from '../../src/const'
+import { PREFECTURE_LIST, SELECT_HOURS } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
 import { saveTestStorage } from '../../src/storage'
 
@@ -18,6 +18,8 @@ const POSTAL_CODE_REGEX = /^\d{7}$/
 const TEL_REGEX = /^0[0-9]{9,10}$/
 
 const NewRestaurant: FC<Props> = () => {
+  const formRef = useRef<HTMLFormElement>(null)
+
   const [name, setName] = useState('')
   const [station, setStationName] = useState('')
   const [tel, setTel] = useState('')
@@ -27,15 +29,33 @@ const NewRestaurant: FC<Props> = () => {
   const [access, setAccess] = useState<string>('')
   const [overview, setOverview] = useState<string>('')
   const [foodImages, setFoodImages] = useState<FileList|null>(null)
+  const [startTime, setStartTime] = useState<string>('')
+  const [endTime, setEndTime] = useState<string>('')
 
   const setLoading = useSetRecoilState(loadingState)
 
-  const allInputted = name && station && tel && postalCode && address && prefecture && overview
+  const allInputted = name && station && tel && postalCode && address && prefecture && overview && startTime && endTime
 
   const notifyError = (message: string) => toast.error(message, {
     duration: 3000,
     position: 'top-center'
   })
+
+  const notifySuccess = (message: string) => toast.success(message, {
+    duration: 3000,
+    position: 'top-center'
+  })
+
+  const resetForm = () => {
+    setName('')
+    setStationName('')
+    setTel('')
+    setPostalCode('')
+    setAddress('')
+    setAccess('')
+    setOverview('')
+    formRef.current?.reset()
+  }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -58,6 +78,8 @@ const NewRestaurant: FC<Props> = () => {
       console.error(e)
     }
     setLoading(false)
+    notifySuccess('焼き鳥店情報を作成しました')
+    resetForm()
   }
 
   const onChangeFoodsFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -69,11 +91,14 @@ const NewRestaurant: FC<Props> = () => {
   return (
     <>
       <div className={styles.NewRestaurant}>
-        <form onSubmit={(e) => onSubmit(e)}>
+        <form
+          ref={formRef}
+          onSubmit={(e) => onSubmit(e)}>
           <div className={styles.NewRestaurant__content}>
             <InputAndLabel
               label='店名'
               isMust
+              name="name"
               value={name}
               onChange={(e) => setName(e.target.value)} />
           </div>
@@ -122,6 +147,20 @@ const NewRestaurant: FC<Props> = () => {
               placeholder='09010101004'
               value={tel}
               onChange={(e) => setTel(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <SelectBoxAndLabel
+              label='営業開始'
+              isMust
+              options={SELECT_HOURS}
+              onChange={(e) => setStartTime(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <SelectBoxAndLabel
+              label='営業終了'
+              isMust
+              options={SELECT_HOURS}
+              onChange={(e) => setEndTime(e.target.value)} />
           </div>
           <div className={styles.NewRestaurant__content}>
             <TextareaAndLabel
