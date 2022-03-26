@@ -8,9 +8,10 @@ import Button from '../atoms/Button'
 import { v4 as uuidv4 } from 'uuid'
 import { useSetRecoilState } from 'recoil'
 import { loadingState } from '../../store/loading/atom'
-import { PREFECTURE_LIST, SELECT_HOURS } from '../../src/const'
+import { PREFECTURE_LIST, SELECT_HOURS, DAY_OF_WEEK } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
 import { saveTestStorage } from '../../src/storage'
+import { map } from 'lodash'
 
 interface Props {}
 
@@ -22,7 +23,7 @@ const NewRestaurant: FC<Props> = () => {
 
   const [name, setName] = useState('')
   const [station, setStationName] = useState('')
-  const [tel, setTel] = useState('')
+  const [contact, setContact] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [prefecture, setPrefecture] = useState(0)
@@ -31,10 +32,13 @@ const NewRestaurant: FC<Props> = () => {
   const [foodImages, setFoodImages] = useState<FileList|null>(null)
   const [startTime, setStartTime] = useState<string>('')
   const [endTime, setEndTime] = useState<string>('')
+  const [lowestPrice, setLowestPrice] = useState('')
+  const [highestPrice, setHighestPrice] = useState('')
+  const [holiday, setHoliday] = useState<number[]>([])
 
   const setLoading = useSetRecoilState(loadingState)
 
-  const allInputted = name && station && tel && postalCode && address && prefecture && overview && startTime && endTime
+  const allInputted = name && station && contact && postalCode && address && prefecture && overview && startTime && endTime
 
   const notifyError = (message: string) => toast.error(message, {
     duration: 3000,
@@ -49,11 +53,14 @@ const NewRestaurant: FC<Props> = () => {
   const resetForm = () => {
     setName('')
     setStationName('')
-    setTel('')
+    setContact('')
     setPostalCode('')
     setAddress('')
     setAccess('')
     setOverview('')
+    setLowestPrice('')
+    setHighestPrice('')
+    setHoliday([])
     formRef.current?.reset()
   }
 
@@ -64,8 +71,11 @@ const NewRestaurant: FC<Props> = () => {
     if (!POSTAL_CODE_REGEX.test(postalCode)) {
       return notifyError('郵便番号の形式が正しくありません')
     }
-    if (!TEL_REGEX.test(tel)) {
+    if (!TEL_REGEX.test(contact)) {
       return notifyError('連絡先の形式が正しくありません')
+    }
+    if (Number(lowestPrice) > Number(highestPrice)) {
+      return notifyError('最低価格が最高価格を超えています')
     }
     if (!foodImages?.length) {
       return notifyError('食べ物の写真が欲しい！')
@@ -78,6 +88,7 @@ const NewRestaurant: FC<Props> = () => {
       console.error(e)
     }
     setLoading(false)
+    console.log(holiday)
     notifySuccess('焼き鳥店情報を作成しました')
     resetForm()
   }
@@ -140,14 +151,32 @@ const NewRestaurant: FC<Props> = () => {
               value={access}
               onChange={(e) => setAccess(e?.target?.value || '')} />
           </div>
+
+          <div className={styles.NewRestaurant__content}>
+            <TextareaAndLabel
+              label='店舗概要'
+              isMust
+              placeholder='絶品焼き鳥のお店'
+              value={overview}
+              onChange={(e) => setOverview(e?.target?.value || '')} />
+          </div>
+
           <div className={styles.NewRestaurant__content}>
             <InputAndLabel
               label='連絡先'
               isMust
               placeholder='09010101004'
-              value={tel}
-              onChange={(e) => setTel(e.target.value)} />
+              value={contact}
+              onChange={(e) => setContact(e.target.value)} />
           </div>
+          <div className={styles.NewRestaurant__content}>
+            <SelectBoxAndLabel
+              label='定休日'
+              multiple
+              options={DAY_OF_WEEK}
+              onChange={(e) => setHoliday(map(e.target.selectedOptions, option => Number(option.value)))} />
+          </div>
+
           <div className={styles.NewRestaurant__content}>
             <SelectBoxAndLabel
               label='営業開始'
@@ -163,12 +192,18 @@ const NewRestaurant: FC<Props> = () => {
               onChange={(e) => setEndTime(e.target.value)} />
           </div>
           <div className={styles.NewRestaurant__content}>
-            <TextareaAndLabel
-              label='店舗概要'
-              isMust
-              placeholder='絶品焼き鳥のお店'
-              value={overview}
-              onChange={(e) => setOverview(e?.target?.value || '')} />
+            <InputAndLabel
+              label='最低価格'
+              type='number'
+              value={lowestPrice}
+              onChange={(e) => setLowestPrice(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='最高価格'
+              type='number'
+              value={highestPrice}
+              onChange={(e) => setHighestPrice(e.target.value)} />
           </div>
           <div className={styles.NewRestaurant__content}>
             <FileInputAndLabel

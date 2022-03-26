@@ -9,6 +9,7 @@ export interface SelectBoxProps {
   options: SelectItems[]
   disabled?: boolean
   name?: string
+  multiple?: boolean
     // eslint-disable-next-line no-unused-vars
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
@@ -19,6 +20,7 @@ const SelectBox: FC<SelectBoxProps> = (props: SelectBoxProps) => {
       <select
         className={styles.SelectBox__select}
         name={props?.name || ''}
+        multiple={props?.multiple || false}
         disabled={props?.disabled || false}
         onChange={props.onChange}>
         {map(props.options, (v, idx) => {

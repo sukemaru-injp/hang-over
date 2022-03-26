@@ -23,6 +23,7 @@ const SelectBoxAndLabel: VFC<Props> = (props: Props) => {
       <SelectBox
         options={props.options}
         name={props?.name || ''}
+        multiple={props?.multiple || false}
         disabled={props?.disabled || false}
         onChange={props.onChange} />
     </>
