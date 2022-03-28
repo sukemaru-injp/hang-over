@@ -29,7 +29,7 @@ const UsersPage: NextPage = () => {
           <div className={styles.UsersPage__buttons}>
             <LinkWrapper link='/users/new'>
               <AddButton
-                onClick={() => {}} />
+                onClick={() => console.log('ok')} />
             </LinkWrapper>
           </div>
         </PageHeader>

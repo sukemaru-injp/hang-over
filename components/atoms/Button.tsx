@@ -1,14 +1,18 @@
-import { FC, MouseEvent, ReactNode } from 'react'
+import { FC, ComponentProps } from 'react'
 import styles from './styles/Button.module.scss'
 
-export interface ButtonProps {
-  children: ReactNode
-  disabled?: boolean
-  type?: 'button'|'submit'|'reset'
+// export interface ButtonProps {
+//   children: ReactNode
+//   disabled?: boolean
+//   type?: 'button'|'submit'|'reset'
+//   color?: 'default'|'delete'
+//   // eslint-disable-next-line no-unused-vars
+//   onClick: (event?: MouseEvent<HTMLButtonElement, MouseEvent>) => void
+// }
+
+export interface ButtonProps extends ComponentProps<'button'> {
   color?: 'default'|'delete'
-  // eslint-disable-next-line no-unused-vars
-  onClick: (event?: MouseEvent<HTMLButtonElement, MouseEvent>) => void
-}
+} 
 
 const Button: FC<ButtonProps> = (props: ButtonProps) => {
   const buttonColor = (type: string) => {
@@ -26,7 +30,7 @@ const Button: FC<ButtonProps> = (props: ButtonProps) => {
       className={buttonColor(props?.color || 'default')}
       disabled={props?.disabled || false}
       type={props?.type || 'button'}
-      onClick={() => props.onClick()}>
+      onClick={props?.onClick}>
       {props.children}
     </button>
   )
