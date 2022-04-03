@@ -12,14 +12,16 @@ import { PREFECTURE_LIST, SELECT_HOURS, DAY_OF_WEEK } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
 import { saveFoodsStorage, saveExteriorStorage } from '../../src/storage'
 import { map } from 'lodash'
-import { setYakitoriInfo } from '../../src/yakitori'
+import { saveYakitoriInfo } from '../../src/yakitori'
 
-interface Props {}
+interface Props {
+  userId: string
+}
 
 const POSTAL_CODE_REGEX = /^\d{7}$/
 const TEL_REGEX = /^0[0-9]{9,10}$/
 
-const NewRestaurant: FC<Props> = () => {
+const NewRestaurant: FC<Props> = (props: Props) => {
   const formRef = useRef<HTMLFormElement>(null)
 
   const [name, setName] = useState('')
@@ -72,7 +74,7 @@ const NewRestaurant: FC<Props> = () => {
     setLng('')
     setRestaurantId('')
     formRef.current?.reset()
-    // TODO削除する
+    // TODO: 削除する
     console.log('reset', restaurantId, foodsImageUrls, exteriorImageUrls)
   }
 
@@ -99,9 +101,10 @@ const NewRestaurant: FC<Props> = () => {
     try {
       const foodUrls = await saveFoodsStorage(sendId, foodImages)
       const exteriorUrls = await saveExteriorStorage(sendId, exteriorImages)
+      // TODO: set不要
       setFoodsImageUrls(foodUrls)
       setExteriorImageUrls(exteriorUrls)
-      await setYakitoriInfo({
+      await saveYakitoriInfo({
         name,
         station,
         contact,
@@ -119,15 +122,16 @@ const NewRestaurant: FC<Props> = () => {
         lng,
         restaurantId: sendId,
         foodsImageUrls: foodUrls,
-        exteriorImageUrls: exteriorUrls
+        exteriorImageUrls: exteriorUrls,
+        createUserId: props.userId
       })
+      notifySuccess('焼き鳥店情報を作成しました')
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
       notifyError('作成に失敗しました')
     }
     setLoading(false)
-    notifySuccess('焼き鳥店情報を作成しました')
     resetForm()
   }
 

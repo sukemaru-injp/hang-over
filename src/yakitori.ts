@@ -19,10 +19,11 @@ export interface YakitoriInfo {
   holiday: number[]
   lat: string
   lng: string
-  restaurantId: string
+  restaurantId: string,
+  createUserId: string
 }
 
-export const setYakitoriInfo = async (params: YakitoriInfo): Promise<void> => {
+export const saveYakitoriInfo = async (params: YakitoriInfo): Promise<void> => {
   const { restaurantId } = params
   console.log(params, restaurantId)
   if (!restaurantId) { return }
