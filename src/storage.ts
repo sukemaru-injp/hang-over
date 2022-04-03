@@ -3,10 +3,10 @@ import { format } from 'date-fns'
 
 const storage = getStorage()
 
-export const saveTestStorage = async (id: string, files: FileList): Promise<string[]> => {
+export const saveFoodsStorage = async (id: string, files: FileList): Promise<string[]> => {
   const urlList: string[] = []
   for (const file of files) {
-    const testStorage = ref(storage, `tests/${id}/${format(new Date(), 'yyyyMMdd')}${file.name}`)
+    const testStorage = ref(storage, `foods/${id}/${format(new Date(), 'yyyyMMdd')}${file.name}`)
     try {
       const { ref } = await uploadBytes(testStorage, file)
       const url = await getDownloadURL(ref)
@@ -15,6 +15,20 @@ export const saveTestStorage = async (id: string, files: FileList): Promise<stri
       Promise.reject(e)
     }
   }
-  console.log('list', urlList)
+  return urlList
+}
+
+export const saveExteriorStorage = async (id: string, files: FileList): Promise<string[]> => {
+  const urlList: string[] = []
+  for (const file of files) {
+    const testStorage = ref(storage, `exterior/${id}/${format(new Date(), 'yyyyMMdd')}${file.name}`)
+    try {
+      const { ref } = await uploadBytes(testStorage, file)
+      const url = await getDownloadURL(ref)
+      urlList.push(url)
+    } catch (e) {
+      Promise.reject(e)
+    }
+  }
   return urlList
 }

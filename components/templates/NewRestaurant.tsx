@@ -10,8 +10,9 @@ import { useSetRecoilState } from 'recoil'
 import { loadingState } from '../../store/loading/atom'
 import { PREFECTURE_LIST, SELECT_HOURS, DAY_OF_WEEK } from '../../src/const'
 import toast, { Toaster } from 'react-hot-toast'
-import { saveTestStorage } from '../../src/storage'
+import { saveFoodsStorage, saveExteriorStorage } from '../../src/storage'
 import { map } from 'lodash'
+import { setYakitoriInfo } from '../../src/yakitori'
 
 interface Props {}
 
@@ -30,15 +31,21 @@ const NewRestaurant: FC<Props> = () => {
   const [access, setAccess] = useState<string>('')
   const [overview, setOverview] = useState<string>('')
   const [foodImages, setFoodImages] = useState<FileList|null>(null)
+  const [exteriorImages, setExteriorImages] = useState<FileList|null>(null)
   const [startTime, setStartTime] = useState<string>('')
   const [endTime, setEndTime] = useState<string>('')
   const [lowestPrice, setLowestPrice] = useState('')
   const [highestPrice, setHighestPrice] = useState('')
   const [holiday, setHoliday] = useState<number[]>([])
+  const [lat, setLat] = useState('')
+  const [lng, setLng] = useState('')
+  const [restaurantId, setRestaurantId] = useState<string>('')
+  const [foodsImageUrls, setFoodsImageUrls] = useState<string[]>([])
+  const [exteriorImageUrls, setExteriorImageUrls] = useState<string[]>([])
 
   const setLoading = useSetRecoilState(loadingState)
 
-  const allInputted = name && station && contact && postalCode && address && prefecture && overview && startTime && endTime
+  const allInputted = name && station && contact && address && prefecture && overview && startTime && endTime
 
   const notifyError = (message: string) => toast.error(message, {
     duration: 3000,
@@ -61,14 +68,19 @@ const NewRestaurant: FC<Props> = () => {
     setLowestPrice('')
     setHighestPrice('')
     setHoliday([])
+    setLat('')
+    setLng('')
+    setRestaurantId('')
     formRef.current?.reset()
+    // TODO削除する
+    console.log('reset', restaurantId, foodsImageUrls, exteriorImageUrls)
   }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const id = uuidv4().split('-')
-    const restaurantId = id[0] + id[1] 
-    if (!POSTAL_CODE_REGEX.test(postalCode)) {
+    const sendId = (id[0] + id[1]) 
+    if (postalCode && !POSTAL_CODE_REGEX.test(postalCode)) {
       return notifyError('郵便番号の形式が正しくありません')
     }
     if (!TEL_REGEX.test(contact)) {
@@ -80,15 +92,41 @@ const NewRestaurant: FC<Props> = () => {
     if (!foodImages?.length) {
       return notifyError('食べ物の写真が欲しい！')
     }
+    if (!exteriorImages?.length) {
+      return notifyError('外観の写真が欲しい！')
+    }
     setLoading(true)
     try {
-      await saveTestStorage(restaurantId, foodImages)
+      const foodUrls = await saveFoodsStorage(sendId, foodImages)
+      const exteriorUrls = await saveExteriorStorage(sendId, exteriorImages)
+      setFoodsImageUrls(foodUrls)
+      setExteriorImageUrls(exteriorUrls)
+      await setYakitoriInfo({
+        name,
+        station,
+        contact,
+        postalCode,
+        address,
+        prefecture,
+        access,
+        overview,
+        startTime,
+        endTime,
+        lowestPrice,
+        highestPrice,
+        holiday,
+        lat,
+        lng,
+        restaurantId: sendId,
+        foodsImageUrls: foodUrls,
+        exteriorImageUrls: exteriorUrls
+      })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
+      notifyError('作成に失敗しました')
     }
     setLoading(false)
-    console.log(holiday)
     notifySuccess('焼き鳥店情報を作成しました')
     resetForm()
   }
@@ -97,6 +135,12 @@ const NewRestaurant: FC<Props> = () => {
     const files = event.target.files
     if (!files) { return }
     setFoodImages(event.target.files)
+  }
+
+  const onChangeExteriorFile = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (!files) { return }
+    setExteriorImages(event.target.files)
   }
 
   return (
@@ -116,7 +160,6 @@ const NewRestaurant: FC<Props> = () => {
           <div className={styles.NewRestaurant__content}>
             <InputAndLabel
               label='郵便番号'
-              isMust
               placeholder='1234567'
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)} />
@@ -150,6 +193,21 @@ const NewRestaurant: FC<Props> = () => {
               placeholder='新橋駅から徒歩10分'
               value={access}
               onChange={(e) => setAccess(e?.target?.value || '')} />
+          </div>
+
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='緯度'
+              placeholder='GoogleMap表示に使用'
+              value={lat}
+              onChange={(e) => setLat(e.target.value)} />
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <InputAndLabel
+              label='経度'
+              placeholder='GoogleMap表示に使用'
+              value={lng}
+              onChange={(e) => setLng(e.target.value)} />
           </div>
 
           <div className={styles.NewRestaurant__content}>
@@ -212,6 +270,14 @@ const NewRestaurant: FC<Props> = () => {
               isMust
               accept="image/*"
               onChange={(e) => onChangeFoodsFile(e)}/>
+          </div>
+          <div className={styles.NewRestaurant__content}>
+            <FileInputAndLabel
+              label='外観写真'
+              multiple
+              isMust
+              accept="image/*"
+              onChange={(e) => onChangeExteriorFile(e)}/>
           </div>
           <div className={styles.NewRestaurant__buttonArea}>
             <Button

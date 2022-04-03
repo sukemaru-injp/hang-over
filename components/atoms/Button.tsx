@@ -1,15 +1,6 @@
 import { FC, ComponentProps } from 'react'
 import styles from './styles/Button.module.scss'
 
-// export interface ButtonProps {
-//   children: ReactNode
-//   disabled?: boolean
-//   type?: 'button'|'submit'|'reset'
-//   color?: 'default'|'delete'
-//   // eslint-disable-next-line no-unused-vars
-//   onClick: (event?: MouseEvent<HTMLButtonElement, MouseEvent>) => void
-// }
-
 export interface ButtonProps extends ComponentProps<'button'> {
   color?: 'default'|'delete'
 } 
