@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { authState } from '../../store/auth/atom'
 import type { Auth } from '../../store/auth/types'
 import { loadingState } from '../../store/loading/atom'
@@ -12,12 +12,11 @@ interface Props {
 }
 
 const AuthCheck: FC<Props> = (props: Props) => {
-  const { isLogin }: Auth = useRecoilValue(authState)
+  // const { isLogin } = useRecoilValue<Auth>(authState)
   const setAuth = useSetRecoilState<Auth>(authState)
   const setLoading = useSetRecoilState<boolean>(loadingState)
 
   useEffect(() => {
-    if (isLogin) { return }
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const { uid } = user

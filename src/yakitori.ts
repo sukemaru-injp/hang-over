@@ -25,7 +25,6 @@ export interface YakitoriInfo {
 
 export const saveYakitoriInfo = async (params: YakitoriInfo): Promise<void> => {
   const { restaurantId } = params
-  console.log(params, restaurantId)
   if (!restaurantId) { return }
   try {
     await setDoc(doc(firestore, 'yakitori', `${restaurantId}`), {

@@ -90,7 +90,9 @@ export const SELECT_HOURS: SelectItems[] = [
   { value: '23:30', label: '23:30' },
   { value: '24:00', label: '24:00' },
   { value: '24:30', label: '24:30' },
-  { value: '25:00', label: '25:00' }
+  { value: '25:00', label: '25:00' },
+  { value: '25:30', label: '25:30' },
+  { value: '26:00', label: '26:00' },
 ]
 
 export const DAY_OF_WEEK: SelectItems[] = [

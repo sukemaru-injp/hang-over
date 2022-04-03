@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode
 }
 const LoadingProvider: FC<Props> = (props: Props) => {
-  const loading = useRecoilValue(loadingState)
+  const loading = useRecoilValue<boolean>(loadingState)
 
   const loadingComponent = (isLoading: boolean) => {
     if(isLoading) {
