@@ -1,20 +1,22 @@
 import { FC, ReactNode, useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { authState } from '../../store/auth/atom'
 import type { Auth } from '../../store/auth/types'
 import { loadingState } from '../../store/loading/atom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../libs/Firebase'
 import { getUserInfoByFireStore } from '../../src/auth'
+import { useRouter } from 'next/router'
 
 interface Props {
   children: ReactNode
 }
 
 const AuthCheck: FC<Props> = (props: Props) => {
-  // const { isLogin } = useRecoilValue<Auth>(authState)
+  const { isLogin } = useRecoilValue<Auth>(authState)
   const setAuth = useSetRecoilState<Auth>(authState)
   const setLoading = useSetRecoilState<boolean>(loadingState)
+  const router = useRouter()
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -39,6 +41,9 @@ const AuthCheck: FC<Props> = (props: Props) => {
         setLoading(false)
       }
     })
+    if (!isLogin) {
+      router.push('/dashboard')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (

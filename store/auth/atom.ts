@@ -1,5 +1,8 @@
 import { atom } from 'recoil'
 import type { Auth } from './types'
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist()
 
 export const authState = atom<Auth>({
   key: 'authState',
@@ -9,5 +12,6 @@ export const authState = atom<Auth>({
     uid: '',
     email: '',
     manage_flag: false
-  }
+  },
+  effects_UNSTABLE: [persistAtom]
 })
