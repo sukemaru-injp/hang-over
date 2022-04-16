@@ -16,6 +16,5 @@ export const authState = atom<Auth>({
     email: '',
     manage_flag: false
   },
-  // localStorageに置くのは背けた方が良いかも
   effects_UNSTABLE: [persistAtom]
 })
