@@ -1,4 +1,4 @@
-export interface YakitoriInfo {
+export interface YakitoriInfoType {
   name: string
   station: string
   contact: string

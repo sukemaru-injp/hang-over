@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
-import type { YakitoriInfo } from './types'
+import type { YakitoriInfoType } from './types'
 
-export const yakitoriList = atom<YakitoriInfo[]>({
+export const yakitoriList = atom<YakitoriInfoType[]>({
   key: 'yakitoriState',
   default: [],
 })

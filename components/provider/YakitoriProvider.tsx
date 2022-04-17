@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { YakitoriInfo } from '../../store/yakitori/types'
+import { YakitoriInfoType } from '../../store/yakitori/types'
 import { yakitoriList } from '../../store/yakitori/atom'
 import { map } from 'lodash'
 import { getDocs, collection } from 'firebase/firestore'
@@ -10,12 +10,12 @@ interface Props {
   children: ReactNode
 }
 const YakitoriProvider: FC<Props> = ({ children }: Props) => {
-  const setList = useSetRecoilState<YakitoriInfo[]>(yakitoriList)
+  const setList = useSetRecoilState<YakitoriInfoType[]>(yakitoriList)
   useEffect(() => {
     (async() => {
       try {
         const res = await getDocs(collection(firestore, 'yakitori'))
-        setList(map(res.docs, v => v.data() as YakitoriInfo))
+        setList(map(res.docs, v => v.data() as YakitoriInfoType))
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e)
