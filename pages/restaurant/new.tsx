@@ -8,7 +8,6 @@ import { authState } from '../../store/auth/atom'
 
 const NewRestaurantPage: NextPage = () => {
   const auth = useRecoilValue<Auth>(authState)
-
   return (
     <>
       <div className={styles.NewRestaurantPage}>

@@ -1,8 +1,8 @@
 import { firestore } from '../libs/Firebase'
 import { doc, setDoc, Timestamp } from 'firebase/firestore'
-import { YakitoriInfo } from '../store/yakitori/types'
+import { YakitoriInfoType } from '../store/yakitori/types'
 
-export const saveYakitoriInfo = async (params: YakitoriInfo): Promise<void> => {
+export const saveYakitoriInfo = async (params: YakitoriInfoType): Promise<void> => {
   const { restaurantId } = params
   if (!restaurantId) { return }
   try {

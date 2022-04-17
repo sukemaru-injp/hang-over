@@ -2,7 +2,7 @@ import { FC, ComponentProps } from 'react'
 import styles from './styles/Button.module.scss'
 
 export interface ButtonProps extends ComponentProps<'button'> {
-  color?: 'default'|'delete'
+  color?: 'default'|'delete'|'edit'
 } 
 
 const Button: FC<ButtonProps> = (props: ButtonProps) => {
@@ -12,6 +12,8 @@ const Button: FC<ButtonProps> = (props: ButtonProps) => {
       return styles.ButtonAtom
     case 'delete':
       return styles.ButtonAtom__delete
+    case 'edit':
+      return styles.ButtonAtom__edit
     default:
       return styles.ButtonAtom  
     }

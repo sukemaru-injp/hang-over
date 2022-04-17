@@ -15,6 +15,10 @@ const YakitoriTable: VFC<Props> = (props: Props) => {
     console.log('delete', item)
   }
 
+  const onClickEdit = (item: YakitoriInfoType) => {
+    console.log('edit', item)
+  }
+
   return (
     <Card>
       <table className={styles.YakitoriTable}>
@@ -34,7 +38,13 @@ const YakitoriTable: VFC<Props> = (props: Props) => {
                 <td className={styles.YakitoriTable__content}>{item.name}</td>
                 <td className={styles.YakitoriTable__content}>{item.address}</td>
 
-                <td className={styles.UserTable__content}>
+                <td className={`${styles.YakitoriTable__content} ${styles.flex}`}>
+                  <Button
+                    color='edit'
+                    type='button'
+                    onClick={() => onClickEdit(item)}>
+                      編集
+                  </Button>
                   <Button
                     color='delete'
                     type='button'

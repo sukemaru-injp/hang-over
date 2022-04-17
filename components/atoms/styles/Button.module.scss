@@ -1,5 +1,6 @@
 $cMain: #C76E5C;
 $cDelete: #dc143c;
+$cEdit: #32a852;
 
 %Button {
   color: #fff;
@@ -25,5 +26,15 @@ $cDelete: #dc143c;
     &:disabled {
       background-color: #bbb;
     }  
+  }
+
+  &__edit {
+    @extend %Button;
+    background-color: $cEdit;
+
+    &:disabled {
+      background-color: #bbb;
+    }  
+
   }
 }
