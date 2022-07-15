@@ -7,6 +7,9 @@ import AuthProvider from '../components/provider/AuthProvider'
 import LoadingProvider from '../components/provider/LoadingProvider'
 import DefaultHead from '../components/atoms/DefaultHead'
 
+import { reduxStore } from '../store/redux'
+import { Provider } from 'react-redux'
+
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <>
@@ -14,9 +17,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <RecoilRoot>
         <AuthProvider>
           <LoadingProvider>
-            <DefaultView>
-              <Component {...pageProps} />
-            </DefaultView>
+            <Provider store={reduxStore}>
+              <DefaultView>
+                <Component {...pageProps} />
+              </DefaultView>
+            </Provider>
           </LoadingProvider>
         </AuthProvider>
       </RecoilRoot>

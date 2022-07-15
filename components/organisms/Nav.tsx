@@ -50,20 +50,6 @@ const Nav: VFC<Props> = (props: Props) => {
               </button>
             </li>
             <li className={styles.Nav__list}>
-              <button className={styles.Nav__button}>
-                <LinkWrapper link='/restaurant'>
-                  店舗管理
-                </LinkWrapper>
-              </button>
-            </li>
-            <li className={styles.Nav__list}>
-              <button className={styles.Nav__button}>
-                <LinkWrapper link='/users'>
-                  ユーザー管理
-                </LinkWrapper>
-              </button>
-            </li>
-            <li className={styles.Nav__list}>
               <button
                 className={styles.Nav__button}
                 onClick={() => onClickLogout()}>
