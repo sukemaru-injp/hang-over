@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import { FC } from 'react'
 import { RecoilRoot } from 'recoil'
 import DefaultView from '../components/templates/DefaultView'
-import AuthProvider from '../components/provider/AuthProvider'
 import LoadingProvider from '../components/provider/LoadingProvider'
 import DefaultHead from '../components/atoms/DefaultHead'
 
@@ -15,15 +14,13 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
     <>
       <DefaultHead />
       <RecoilRoot>
-        <AuthProvider>
-          <LoadingProvider>
-            <Provider store={reduxStore}>
-              <DefaultView>
-                <Component {...pageProps} />
-              </DefaultView>
-            </Provider>
-          </LoadingProvider>
-        </AuthProvider>
+        <LoadingProvider>
+          <Provider store={reduxStore}>
+            <DefaultView>
+              <Component {...pageProps} />
+            </DefaultView>
+          </Provider>
+        </LoadingProvider>
       </RecoilRoot>
     </>
   )
