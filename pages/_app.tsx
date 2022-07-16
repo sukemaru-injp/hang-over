@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { FC } from 'react'
 import { RecoilRoot } from 'recoil'
-import DefaultView from '../components/templates/DefaultView'
+import Layout from '../components/templates/Layout'
 import LoadingProvider from '../components/provider/LoadingProvider'
 import DefaultHead from '../components/atoms/DefaultHead'
 
@@ -16,9 +16,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <RecoilRoot>
         <LoadingProvider>
           <Provider store={reduxStore}>
-            <DefaultView>
+            <Layout>
               <Component {...pageProps} />
-            </DefaultView>
+            </Layout>
           </Provider>
         </LoadingProvider>
       </RecoilRoot>
