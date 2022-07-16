@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "next/core-web-vitals", "plugin:storybook/recommended"],
+  "extends": ["eslint:recommended", "next/core-web-vitals"],
   "rules": {
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     "quotes": ["error", "single"],
