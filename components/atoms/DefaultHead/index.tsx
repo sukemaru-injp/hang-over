@@ -7,7 +7,7 @@ interface Props {
 const DefaultHead: VFC<Props> = (props: Props) => {
   return (
     <Head>
-      <title>{props?.title ? props.title : '焼鳥ライフハック|管理画面'}</title>
+      <title>{props?.title ? props.title : 'HangOver'}</title>
       <link rel="icon" href="/favicon-test.png" />
     </Head>
   )

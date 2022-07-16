@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import styles from './styles/Loading.module.scss'
+import styles from './Loading.module.scss'
 
 interface Props {}
 const Loading: VFC<Props> = () => {

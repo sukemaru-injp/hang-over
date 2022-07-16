@@ -1,0 +1,19 @@
+$cMain: #C76E5C;
+
+%Button {
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonAtom {
+  @extend %Button;
+  background-color: $cMain;
+
+  &:disabled {
+    background-color: #bbb;
+  }
+}

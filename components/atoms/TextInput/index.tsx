@@ -1,5 +1,6 @@
 import { FC, ChangeEvent } from 'react'
-import styles from './styles/TextInput.module.scss'
+import styles from './TextInput.module.scss'
+
 export interface TextInputProps {
   disabled?: boolean
   value: string
