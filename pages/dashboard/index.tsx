@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import styles from './styles/DashboardPage.module.scss'
-import DashboardMain from '../../components/templates/DashboardMain'
+import DashboardMain from '../../components/templates/Dashboard/DashboardMain'
 
 const DashboardPage: NextPage = () => {
   return (

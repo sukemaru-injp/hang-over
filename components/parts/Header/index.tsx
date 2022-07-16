@@ -1,7 +1,7 @@
 import { VFC, memo } from 'react'
-import styles from './styles/Header.module.scss'
+import styles from './Header.module.scss'
 import Image from 'next/image'
-import LinkWrapper from '../atoms/LinkWrapper'
+import LinkWrapper from '../../atoms/LinkWrapper'
 
 interface Props {}
 

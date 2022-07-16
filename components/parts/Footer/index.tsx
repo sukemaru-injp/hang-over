@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import styles from './styles/Footer.module.scss'
+import styles from './Footer.module.scss'
 
 interface Props {}
 const Footer: VFC<Props> = () => {
